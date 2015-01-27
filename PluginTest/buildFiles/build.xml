@@ -1,0 +1,63 @@
+<project basedir="../" default="all" name="PluginTest">
+
+	
+	<property name="Project" value="PluginTest" />
+
+	<!-- ========== Executable Targets ======================================== -->
+	<property name="Name" value="PluginTest" />
+	<import file="../../edu.harvard.i2b2.common/common_build.xml" />
+	<property name="gensrc"     value="gensrc"/>
+
+	<!-- =================================================================== -->
+	<!-- 								INIT 								 -->
+	<!-- =================================================================== -->
+	<target name="gensrcInit"  depends="common_init,common-classpath" >
+		<path id="classpath">
+			<path refid="common-classpath" />
+		</path>
+
+		<taskdef name="xjc" classname="com.sun.tools.xjc.XJCTask">
+			<classpath refid="classpath" />
+		</taskdef>
+
+	</target>
+
+
+
+	<!-- =================================================================== -->
+	<!-- 								CLEAN 								 -->
+	<!-- =================================================================== -->
+	<target name="clean"  description="Clean all build products" >
+    	<delete dir="${dist}"/> 
+    	<delete dir="${gensrc}"/>   
+    <!--	<delete dir="${genlib}"/> 
+    	<mkdir dir="${genlib}"/>-->
+    	<mkdir dir="${dist}"/>
+    	<mkdir dir="${gensrc}"/>
+	</target>
+
+	<!-- =================================================================== -->
+	<!-- 								COMMON JAXB GENERATION 				 -->
+	<!-- =================================================================== -->
+	<target name="jaxb_gen" depends="gensrcInit">
+		<!--	 <java dir="." jar="../edu.harvard.i2b2.common/lib/jaxb/jaxb-xjc.jar" fork="true" failonerror="true" >
+			     <arg line="-quiet -nv -extension ../JAXBTest/schema/TestClass01.xsd
+			     	 -d ${gensrc}"/>
+			     <jvmarg value="-Djava.endorsed.dirs=../edu.harvard.i2b2.common/lib/jaxb" />
+			     <classpath refid="classpath"/>
+			</java>
+			-->
+		<xjc destdir="${gensrc}">
+			<schema dir="../JAXBTest/schema" includes="**/*.xsd"/>
+			</xjc>
+	</target>
+	
+	<!-- =================================================================== -->
+	<!-- 								ALL 								 -->
+	<!-- =================================================================== -->
+	<target name="all" depends="jaxb_gen">
+	</target>
+	
+	
+	
+</project>

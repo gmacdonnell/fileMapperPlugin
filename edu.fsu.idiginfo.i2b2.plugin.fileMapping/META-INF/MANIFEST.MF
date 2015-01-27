@@ -1,0 +1,27 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: FileMapping
+Bundle-SymbolicName: edu.fsu.idiginfo.i2b2.plugin.fileMapping; singleton:=true
+Bundle-Version: 1.0.0
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.ui,
+ edu.harvard.i2b2.eclipse;bundle-version="1.4.0",
+ edu.harvard.i2b2.eclipse.plugins.webservicesAxis2;bundle-version="1.1.0",
+ edu.harvard.i2b2.eclipse.plugins.xml_support_jaxb;bundle-version="2.1.2",
+ edu.harvard.i2b2.eclipse.plugins.commons_apache;bundle-version="1.0.4",
+ org.apache.commons.logging;bundle-version="1.1.1"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6,
+ JavaSE-1.7
+Bundle-Vendor: edu.fsu.idiginfo
+Bundle-ClassPath: .,
+ genlib/i2b2Common-core.jar
+Export-Package: edu.fsu.idiginfo.i2b2.filemapping.Data,
+ edu.fsu.idiginfo.i2b2.filemapping.requiredfields,
+ edu.fsu.idiginfo.i2b2.fmpclient.datavo.psm.query,
+ edu.fsu.idiginfo.i2b2.fmpclient.datavo.requiredFields,
+ edu.fsu.idiginfo.i2b2.plugin.filemapping,
+ edu.fsu.idiginfo.i2b2.plugin.filemapping.util,
+ edu.fsu.idiginfo.i2b2.plugin.filemapping.views,
+ edu.fsu.idiginfo.i2b2.plugin.filemapping.ws,
+ org.i2b2.xsd.cell.crc.psm.analysisdefinition._1,
+ org.i2b2.xsd.cell.crc.psm.querydefinition._1

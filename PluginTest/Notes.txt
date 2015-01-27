@@ -1,0 +1,41 @@
+Notes on sending queries to i2b2 query service
+the query type is determined in the class QueryRequestDelegate.handelRequest()
+on the plugin side the type is set in my class messageEngine.getXMLString()
+headerType
+				.setRequestType(PsmRequestTypeType.CRC_QRY_RUN_QUERY_INSTANCE_FROM_QUERY_DEFINITION);
+
+
+DOA classes hold the queries example
+
+package edu.harvard.i2b2.ontology.dao;
+class ConceptDao extends JdbcDaoSupport {
+
+stack 
+package edu.harvard.i2b2.ontology.ws;
+	public class OntologyService {
+		public OMElement getCodeInfo(OMElement getCodeInfoElement)->
+
+
+package edu.harvard.i2b2.ontology.delegate;
+	public class GetCodeInfoHandler extends RequestHandler {
+		execute->
+
+package edu.harvard.i2b2.ontology.dao;
+	class ConceptDao extends JdbcDaoSupport {
+		SimpleJdbcTemplate.query(query string) function to execute sql
+
+next example
+
+package edu.harvard.i2b2.crc.loader.ws;
+	public class ProviderRestService {
+		public OMElement publishDataRequest(OMElement request) ->
+package edu.harvard.i2b2.crc.loader.delegate;
+	public class LoaderQueryRequestDelegate extends RequestHandlerDelegate {
+		public String handleRequest(String requestXml, RequestHandler requestHandler)->
+package edu.harvard.i2b2.crc.loader.delegate;
+	public class PublishDataRequestHandler extends RequestHandler {
+		public BodyType execute() throws I2B2Exception ->
+package edu.harvard.i2b2.crc.loader.ejb;
+	public class DataMartLoaderAsyncBean implements DataMartLoaderAsyncBeanRemote,DataMartLoaderAsyncBeanLocal {
+		public LoadDataResponseType load(DataSourceLookup dataSourceLookup,String publishMessage, SecurityType i2b2SecurityType, long timeout, String 			fileSystemDefaultStorageResource) throws I2B2Exception ->
+			private LoadDataResponseType buildResponse(IUploaderDAOFactory uploaderDaoFactory, int uploadId)throws I2B2Exceptio->

@@ -1,0 +1,56 @@
+<project basedir="../" default="all" name="FileMapper">
+
+	
+	<property name="Project" value="edu.harvard.i2b2.eclipse.ontology" />
+	<property name="XMLFiles" value="fileMapperXML" />
+	<!-- ========== Executable Targets ======================================== -->
+	<property name="Name" value="FileMapper" />
+	<import file="../../edu.harvard.i2b2.common/common_build.xml" />
+	<property name="gensrc"     value="gensrc"/>
+
+	<!-- =================================================================== -->
+	<!-- 								INIT 								 -->
+	<!-- =================================================================== -->
+	<target name="gensrcInit"  depends="common_init,common-classpath" >
+		<path id="classpath">
+			<path refid="common-classpath" />
+		</path>
+
+	</target>
+
+
+
+	<!-- =================================================================== -->
+	<!-- 								CLEAN 								 -->
+	<!-- =================================================================== -->
+	<target name="clean"  description="Clean all build products" >
+    	<delete dir="${dist}"/> 
+    	<delete dir="${gensrc}"/>   
+    	<delete dir="${genlib}"/>
+    	<mkdir dir="${genlib}"/>
+    	<mkdir dir="${dist}"/>
+    	<mkdir dir="${gensrc}"/>
+	</target>
+
+	<!-- =================================================================== -->
+	<!-- 								COMMON JAXB GENERATION 				 -->
+	<!-- =================================================================== -->
+	
+	<target name="jaxb_gen" depends="gensrcInit">
+			 <java dir="." jar="../edu.harvard.i2b2.common/lib/jaxb/jaxb-xjc.jar" fork="true" failonerror="true" >
+			     <arg line="-quiet -nv -extension ${XMLFiles}/xsd/fileMapper_DataTypes.xsd  ../${i2b2xmlproject}/xsd/cell/ont_1.1/ONT_QRY.xsd ../${i2b2xmlproject}/xsd/cell/crc/psm_1.1/CRC_PSM_QRY.xsd ../${i2b2xmlproject}/xsd/cell/crc/pdo_1.1/CRC_PDO_QRY.xsd ../${i2b2xmlproject}/xsd/hive/msg_1.1/i2b2_response.xsd  ../${i2b2xmlproject}/xsd/hive/pdo_1.1/i2b2_PDO.xsd ../${i2b2xmlproject}/xsd/cell/crc/psm_1.1/CRC_PSM_QRY_query_definition.xsd ../${i2b2xmlproject}/xsd/hive/plugin/drag_drop.xsd ../${i2b2xmlproject}/xsd/hive/msg_1.1/i2b2_result_msg.xsd
+			      -b ${XMLFiles}/1.1/i2b2_vdo_bindings.xjb ${XMLFiles}/bindings/fileMapper_DataTypes_bindings.xjb ${XMLFiles}/1.1/i2b2_pdo_bindings.xjb ${XMLFiles}/1.1/i2b2_response_message_bindings.xjb ${XMLFiles}/1.1/crc_psm_qry.xjb ${XMLFiles}/1.1/i2b2_qry_result.xjb ${XMLFiles}/bindings/crc_pdo_qry.xjb ${XMLFiles}/bindings/crc_psm_qry_def.xjb 
+			     -d ${gensrc}"/>
+			    
+			 	<jvmarg value="-Djava.endorsed.dirs=../edu.harvard.i2b2.common/lib/jaxb" />
+			     <classpath refid="classpath"/>
+			</java>
+	</target>
+	
+	
+	<!-- =================================================================== -->
+	<!-- 								ALL 								 -->
+	<!-- =================================================================== -->
+	<target name="all" depends="jaxb_gen">
+	</target>
+</project>
