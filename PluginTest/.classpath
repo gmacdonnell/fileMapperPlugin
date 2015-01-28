@@ -9,5 +9,7 @@
 	<classpathentry kind="lib" path="forms-1.3.0.jar" sourcepath="forms-1.3.0-src.zip"/>
 	<classpathentry exported="true" kind="lib" path="genlib/i2b2Common-core.jar" sourcepath="/edu.harvard.i2b2.common"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/edu.harvard.i2b2.eclipse.plugins.query"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/WorkBench02"/>
+	<classpathentry kind="lib" path="/WorkBench02/dist/FileMapper.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

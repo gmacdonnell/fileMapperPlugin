@@ -17,7 +17,7 @@ import javax.swing.JRootPane;
 import javax.swing.JButton;
 import org.eclipse.swt.layout.GridLayout;
 
-import plugintest.messaging.MessageEngine;
+import fileMapper.fileMapperUtil.messaging.*;
 
 import javax.swing.JPanel;
 import java.awt.event.ActionListener;
@@ -85,9 +85,9 @@ private Composite parent;
 	
 	public void SendMessage()
 	{
-		MessageEngine meSender = new MessageEngine();
-		//meSender.test01();
-		meSender.sendQuery();
+		FileMappingMessageEngine meSender = new FileMappingMessageEngine();
+		meSender.test01();
+		//meSender.sendQuery();
 		//meSender.test04();
 	}
 	public void Test01()

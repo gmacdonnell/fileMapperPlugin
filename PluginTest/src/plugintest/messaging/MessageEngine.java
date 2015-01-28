@@ -46,6 +46,7 @@ import edu.harvard.i2b2.query.serviceClient.QueryRequestClient;
 public class MessageEngine {
 	private String xmlStr = null;
 	private String response = null;
+	public static final String TARGETURL="http://144.174.39.18/i2b2/services/FileMapperService/getDataTypes";
 	public  void test01()
 	{
 		
@@ -55,7 +56,7 @@ public class MessageEngine {
 		OMElement payload = getPayLoad(XMLstr);
 		Options options = new Options();
 		//EndpointReference targetEPR = new EndpointReference( UserInfoBean.getInstance().getCellDataUrl("CRC") + "request");
-		EndpointReference targetEPR = new EndpointReference("http://128.186.73.214:9090/i2b2/services/TESTService/request");
+		EndpointReference targetEPR = new EndpointReference(TARGETURL);
 		//options.setTo(targetEPR);
 		options.setTo(targetEPR);
 		options.setTransportInProtocol(Constants.TRANSPORT_HTTP);
@@ -84,8 +85,7 @@ public class MessageEngine {
 
 			// RPCServiceClient serviceClient = new RPCServiceClient();
 
-			EndpointReference targetEPR = new EndpointReference(
-					"http://128.186.73.214:9090/i2b2/services/TESTService/request");
+			EndpointReference targetEPR = new EndpointReference(TARGETURL);
 			 Options options = getOptions();
 			 options.setTo(targetEPR);
 			 sender.setOptions(options);
@@ -104,7 +104,7 @@ public class MessageEngine {
 		
 		Options options = getOptions();
 		//EndpointReference targetEPR = new EndpointReference( UserInfoBean.getInstance().getCellDataUrl("CRC") + "request");
-		EndpointReference targetEPR = new EndpointReference("http://128.186.73.214:9090/i2b2/services/TESTService/request");
+		EndpointReference targetEPR = new EndpointReference(TARGETURL);
 		options.setTo(targetEPR);
 		
 
