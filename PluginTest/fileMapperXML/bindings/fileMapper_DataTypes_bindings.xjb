@@ -4,7 +4,7 @@
                 
     <jxb:bindings schemaLocation="../xsd/fileMapper_DataTypes.xsd" node="/xs:schema">
         <jxb:schemaBindings > 
-	           <jxb:package name="fileMapper.data">
+	           <jxb:package name="fileMapper.data.datavo.vdo">
 	  	         <jxb:javadoc><![CDATA[<body>Package level 
 	  	 documentation for generated package primer.myPo.</body>]]>
 	  	         </jxb:javadoc>

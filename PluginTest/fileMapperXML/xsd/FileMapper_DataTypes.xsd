@@ -23,4 +23,8 @@
     		<element name="isKey" type="boolean"></element>
     	</sequence>
     </complexType>
+
+    <element name="get_dataType" type="map:DataType"></element>
+
+    <element name="get_dataTypeField" type="map:DataType"></element>
 </schema>

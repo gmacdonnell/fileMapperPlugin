@@ -24,9 +24,7 @@ public class JAXBConstant {
             "fileMapper.data.datavo.i2b2message",
             "fileMapper.data.datavo.i2b2result",
             "fileMapper.data.datavo.vdo",
-            "fileMapper.data.datavo.pdo",
             "fileMapper.data.datavo.pdo.query",
-            "fileMapper.data.datavo.psm",
             "fileMapper.data.datavo.psm.query"
         };
     

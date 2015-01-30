@@ -42,83 +42,36 @@ import fileMapper.fileMapperUtil.MessageUtil;
 import fileMapper.fileMapperUtil.FileMapperJAXBUtil;
 import fileMapper.data.datavo.i2b2message.MessageHeaderType;
 import fileMapper.data.datavo.i2b2message.ResponseMessageType;
-import fileMapper.data.datavo.vdo.GetOntProcessStatusType;
 import fileMapper.data.datavo.vdo.GetReturnType;
-import fileMapper.data.datavo.vdo.GetTermInfoType;
-import fileMapper.data.datavo.vdo.UpdateCrcConceptType;
+
 
 
 import edu.harvard.i2b2.common.exception.I2B2Exception;
 import edu.harvard.i2b2.common.util.jaxb.JAXBUtilException;
 import edu.harvard.i2b2.common.util.xml.*;
 
+import fileMapper.data.DataType;
 
 
 public class FileMapperServiceDriver {
 
 	public static final String THIS_CLASS_NAME = FileMapperServiceDriver.class.getName();
     private static Log log = LogFactory.getLog(THIS_CLASS_NAME);
-    private static String serviceURL = UserInfoBean.getInstance().getCellDataUrl("ont");
-    private static String serviceMethod = UserInfoBean.getInstance().getCellDataMethod("ont").toUpperCase();
+    private static String serviceURL = UserInfoBean.getInstance().getCellDataUrl("MAP");
+    private static String serviceMethod = UserInfoBean.getInstance().getCellDataMethod("MAP").toUpperCase();
 	private static EndpointReference soapEPR = new EndpointReference(serviceURL);
 	
-	private static EndpointReference childrenEPR = new EndpointReference(
-			serviceURL + "getChildren");
+	private static EndpointReference dataTypesERP = new EndpointReference(
+			serviceURL + "getDataTypes");
 
-	private static EndpointReference categoriesEPR = new EndpointReference(
-		serviceURL + "getCategories");
+	private static EndpointReference keysEPR = new EndpointReference(
+		serviceURL + "getKeys");
 	
-	private static EndpointReference nameInfoEPR = new EndpointReference(
-			serviceURL + "getNameInfo");
+	private static EndpointReference dimensionsEPR = new EndpointReference(
+			serviceURL + "getDimensions");
 	
-	private static EndpointReference codeInfoEPR = new EndpointReference(
-		serviceURL + "getCodeInfo");
-	
-	private static EndpointReference termInfoEPR = new EndpointReference(	
-			serviceURL + "getTermInfo");
-	
-	private static EndpointReference schemesEPR = new EndpointReference(
-					serviceURL + "getSchemes");
-	
-	private static EndpointReference addEPR = new EndpointReference(
-			serviceURL + "addChild");
-	
-	private static EndpointReference deleteEPR = new EndpointReference(
-			serviceURL + "deleteChild");
-	
-	private static EndpointReference modifyEPR = new EndpointReference(
-			serviceURL + "modifyChild");
-	
-	private static EndpointReference synchronizeEPR = new EndpointReference(
-			serviceURL + "updateCRCConcept");
-	
-	private static EndpointReference getStatusEPR = new EndpointReference(
-			serviceURL + "getProcessStatus");
-	
-	private static EndpointReference dirtyStateEPR = new EndpointReference(
-			serviceURL + "getDirtyState");
-	
-	private static EndpointReference modifiersEPR = new EndpointReference(
-			serviceURL + "getModifiers");
-	
-	private static EndpointReference modifierChildrenEPR = new EndpointReference(
-			serviceURL + "getModifierChildren");
-	
-	private static EndpointReference modifierInfoEPR = new EndpointReference(	
-			serviceURL + "getModifierInfo");
-	
-	private static EndpointReference addModifierEPR = new EndpointReference(
-			serviceURL + "addModifier");
-
-	private static EndpointReference excludeModifierEPR = new EndpointReference(
-			serviceURL + "excludeModifier");
-
-	
-	private static EndpointReference modNameInfoEPR = new EndpointReference(
-			serviceURL + "getModifierNameInfo");
-	
-	private static EndpointReference modCodeInfoEPR = new EndpointReference(
-		serviceURL + "getModifierCodeInfo");
+	private static EndpointReference servicesEPR = new EndpointReference(
+		serviceURL + "getServices");
 	
 	
 	
@@ -130,30 +83,100 @@ public class FileMapperServiceDriver {
 
         return method;
     }
+    
+    public static String getDataTypes() throws Exception 
+    {
+    	String response = null;
+    	GetReturnType dataType = new GetReturnType();
+    	dataType.setType("DATATYPE");
+    	GetDataTypesRequestMessage reqMsg = new GetDataTypesRequestMessage();
+    	try{
+   	 String requestString = reqMsg.doBuildXML(dataType);
+
+   	
+   		response = sendREST(dataTypesERP, requestString);
+    	
+    		
+    	} catch (AxisFault e) {
+			log.error(e.getMessage());
+			//throw new AxisFault(e);
+		} catch (I2B2Exception e) {
+			log.error(e.getMessage());
+			throw new I2B2Exception(e.getMessage());
+		} catch (Exception e) {
+			log.error(e.getMessage());
+			throw new Exception(e);
+		}
+    	
+    	return response;
+    }
+    public static String getKeys(DataType dataType) throws Exception 
+    {
+    	String response = null;
+try{
+
 	
-	
-	/**
-	 * Function to send getSchemes requestVdo to ONT web service
-	 * 
-	 * @param GetReturnType  return parameters 
-	 * @return A String containing the ONT web service response 
-	 */
-	
-	public static String getSchemes(GetReturnType returnData, String type) throws Exception{
+    	} catch (AxisFault e) {
+			log.error(e.getMessage());
+			//throw new AxisFault(e);
+		} catch (I2B2Exception e) {
+			log.error(e.getMessage());
+			throw new I2B2Exception(e.getMessage());
+		} catch (Exception e) {
+			log.error(e.getMessage());
+			throw new Exception(e);
+		}
+    	return response;
+    }
+    public static String getDimensions(DataType datatype) throws Exception 
+    {
+    	String response = null;
+try{
+    		
+    	} catch (AxisFault e) {
+			log.error(e.getMessage());
+			//throw new AxisFault(e);
+		} catch (I2B2Exception e) {
+			log.error(e.getMessage());
+			throw new I2B2Exception(e.getMessage());
+		} catch (Exception e) {
+			log.error(e.getMessage());
+			throw new Exception(e);
+		}
+    	return response;
+    }
+    public static String getServices(String service) throws Exception 
+    {
+    	String response = null;
+try{
+    		
+    	} catch (AxisFault e) {
+			log.error(e.getMessage());
+			//throw new AxisFault(e);
+		} catch (I2B2Exception e) {
+			log.error(e.getMessage());
+			throw new I2B2Exception(e.getMessage());
+		} catch (Exception e) {
+			log.error(e.getMessage());
+			throw new Exception(e);
+		}
+    	return response;
+    }
+
+	/*
+    public static String getDirtyState(GetReturnType returnData, String type) throws Exception {
 		String response = null;
 			 try {
-				 GetSchemesRequestMessage reqMsg = new GetSchemesRequestMessage();
-				 String getSchemesRequestString = reqMsg.doBuildXML(returnData);
+				 GetDirtyStateRequestMessage reqMsg = new GetDirtyStateRequestMessage();
+				 String requestString = reqMsg.doBuildXML(returnData);
 
-	//			log.debug(getSchemesRequestString);
-				
 				if(serviceMethod.equals("SOAP")) {
-					response = sendSOAP(getSchemesRequestString, "http://rpdr.partners.org/GetSchemes", "GetSchemes", type );
+					response = sendSOAP(requestString,"http://rpdr.partners.org/GetCategories", "GetCategories", type );
 				}
 				else {
-					response = sendREST(schemesEPR, getSchemesRequestString, type);
+					response = sendREST(dirtyStateEPR, requestString, type);
 				}
-//				log.debug("Ont response = " + response);
+	//			log.debug("MAP response = " + response);
 			} catch (AxisFault e) {
 				log.error(e.getMessage());
 				//throw new AxisFault(e);
@@ -166,59 +189,9 @@ public class FileMapperServiceDriver {
 			}
 		return response;
 	}
-	
-	
-	/**
-	 * Function to send getTermInfo requestVdo to ONT web service
-	 * 
-	 * @param GetTermInfoType  node (self) we wish to get data for
-	 * @return A String containing the ONT web service response 
-	 */
-	
-	public static String getTermInfo(GetTermInfoType self, String type) throws Exception{
-		String response = null;
-			 try {
-				 GetTermInfoRequestMessage reqMsg = new GetTermInfoRequestMessage();
+	*/
 
-				 String getTermInfoRequestString = reqMsg.doBuildXML(self);		
-
-	//			log.debug(getTermInfoRequestString);
-				
-	//			 if(serviceMethod.equals("SOAP")) {
-	//				 response = sendSOAP(getTermInfoRequestString, "http://rpdr.partners.org/GetTermInfo", "GetTermInfo", type );
-	//			 }
-	//			 else {
-					 response = sendREST(termInfoEPR, getTermInfoRequestString, type);
-		//		 }
-
-//				log.debug("Ont response = " + response);
-			} catch (AxisFault e) {
-				log.error(e.getMessage());
-				//throw new AxisFault(e);
-			} catch (Exception e) {
-				log.error(e.getMessage());
-				throw new Exception(e);
-			}
-		return response;
-	}
-	
-	
-	
-	/**
-	 * Function to send getNameInfo requestVdo to ONT web service
-	 * 
-	 * @param VocabRequestType  return parameters 
-	 * @return A String containing the ONT web service response 
-	 */
-	
-	
-	/**
-	 * Function to convert Ont requestVdo to OMElement
-	 * 
-	 * @param requestVdo   String requestVdo to send to Ont web service
-	 * @return An OMElement containing the Ont web service requestVdo
-	 */
-	public static OMElement getOntPayLoad(String requestVdo) throws Exception {
+public static OMElement getMAPPayLoad(String requestVdo) throws Exception {
 		OMElement lineItem  = null;
 		try {
 			StringReader strReader = new StringReader(requestVdo);
@@ -234,31 +207,20 @@ public class FileMapperServiceDriver {
 		return lineItem;
 	}
 	
-	/**
-	 * Function to send getCodeInfo requestVdo to ONT web service
-	 * 
-	 * @param VocabRequestType vocabType we wish to get data for
-	 * @return A String containing the ONT web service response 
-	 */
+
 	
 	
 	
 	
-	public static String sendREST(EndpointReference restEPR, String requestString, String type) throws Exception{	
-		if(UserInfoBean.getInstance().getCellDataUrl("ont") == null){
-			throw new I2B2Exception("Ontology cell (ONT) not configured in PM");
+	public static String sendREST(EndpointReference restEPR, String requestString) throws Exception{	
+		if(UserInfoBean.getInstance().getCellDataUrl("MAP") == null){
+			throw new I2B2Exception("FileMapper cell (MAP) not configured in PM");
 		}
 //		requestString.replaceAll("\\p{Cntrl}", "");  did not fix illegal control char error
-		OMElement getOnt = getOntPayLoad(requestString);
+		OMElement getMAP = getMAPPayLoad(requestString);
 
-		if(type != null){
-			if(type.equals("ONT"))
-				MessageUtil.getInstance().setNavRequest("URL: " + restEPR + "\n" + getOnt.toString());
-			else if(type.equals("EDIT"))
-				MessageUtil.getInstance().setEditRequest("URL: " + restEPR + "\n" + getOnt.toString());
-			else 
-				MessageUtil.getInstance().setFindRequest("URL: " + restEPR + "\n" + getOnt.toString());
-		}
+		MessageUtil.getInstance().setNavRequest("URL: " + restEPR + "\n" + getMAP.toString());
+	
 		
 		Options options = new Options();
 		log.debug(restEPR.toString());
@@ -274,7 +236,7 @@ public class FileMapperServiceDriver {
 
 		OMElement result;
 		try {
-			result = sender.sendReceive(getOnt);
+			result = sender.sendReceive(getMAP);
 		} catch (java.lang.OutOfMemoryError e) {
 			System.gc();
 			throw new I2B2Exception("Out of memory");
@@ -282,15 +244,9 @@ public class FileMapperServiceDriver {
 		}
 		String response = result.toString();
 		
-		if(type != null){
-			if(type.equals("ONT"))
-				MessageUtil.getInstance().setNavResponse("URL: " + restEPR + "\n" + response);
-			else if(type.equals("EDIT"))
-				MessageUtil.getInstance().setEditResponse("URL: " + restEPR + "\n" + response);
-			
-			else 
-				MessageUtil.getInstance().setFindResponse("URL: " + restEPR + "\n" + response);
-		}
+		
+	//?	MessageUtil.getInstance().setNavResponse("URL: " + restEPR + "\n" + response);
+		
 		
 		int timeout = processSecurityResult(response);
 //		log.info("get timeout from server: "+ timeout + " at: "+Calendar.getInstance().getTime());
@@ -317,9 +273,9 @@ public class FileMapperServiceDriver {
 			}
 
 			/*if (procStatus.equals("ERROR")) {
-				log.error("Error reported by Ont web Service " + procMessage);
+				log.error("Error reported by MAP web Service " + procMessage);
 			} else if (procStatus.equals("WARNING")) {
-				log.error("Warning reported by Ont web Service" + procMessage);
+				log.error("Warning reported by MAP web Service" + procMessage);
 			}*/
 
 		} catch (JAXBUtilException e) {
@@ -374,7 +330,7 @@ public class FileMapperServiceDriver {
 		if(type != null){
 			String request = envelope.toString();
 			String formattedRequest = XMLUtil.StrFindAndReplace("&lt;", "<", request);
-			if (type.equals("ONT")){
+			if (type.equals("MAP")){
 				MessageUtil.getInstance().setNavRequest("URL: " + soapEPR + "\n" + formattedRequest);
 			}
 
@@ -393,7 +349,7 @@ public class FileMapperServiceDriver {
 		OMElement soapResponse = responseEnv.getBody().getFirstElement();
 		
 		if(type != null){
-			if(type.equals("ONT")){
+			if(type.equals("MAP")){
 				String formattedResponse = XMLUtil.StrFindAndReplace("&lt;", "<", responseEnv.toString());
 				String indentedResponse = XMLUtil.convertDOMToString(XMLUtil.convertStringToDOM(formattedResponse) );
 				MessageUtil.getInstance().setNavResponse("URL: " + soapEPR + "\n" + indentedResponse);
@@ -415,107 +371,11 @@ public class FileMapperServiceDriver {
 	}
 
 	
-	/**
-	 * Function to send synchronize concepts requestVdo to ONT web service
-	 * 
-	 *
-	 * @return A String containing the ONT web service response 
-	 */
+
+
 	
-	public static String synchronize(String operationType, boolean includeHiddens) throws Exception{
-		String response = null;
-
-		try {
-			SynchronizeRequestMessage reqMsg = new SynchronizeRequestMessage();
-			UpdateCrcConceptType requestType = reqMsg.getUpdateCrcConceptType(operationType, includeHiddens);
-			
-			String requestString = reqMsg.doBuildXML(requestType);
-			log.debug(requestString);
-
-			if(serviceMethod.equals("SOAP")) { 
-				//	response = sendSOAP(.....);
-				log.error("SOAP version of synchronize has not been implemented");
-				response = sendREST(synchronizeEPR, requestString, "EDIT");
-			}
-			else {
-				response = sendREST(synchronizeEPR, requestString, "EDIT");
-			}
-		} catch (AxisFault e) {
-			log.error(e.getMessage());
-			//throw new AxisFault(e);
-		} catch (Exception e) {
-			log.error(e.getMessage());
-			throw new Exception(e);
-		}
-		return response;
-	}
 	
-	/**
-	 * Function to send get process status requestVdo to ONT web service
-	 * 
-	 *
-	 * @return A String containing the ONT web service response 
-	 */
 	
-	public static String getProcessStatus(GetOntProcessStatusType process) throws Exception{
-		String response = null;
-
-		try {
-			GetProcessStatusRequestMessage reqMsg = new GetProcessStatusRequestMessage();
-
-			String requestString = reqMsg.doBuildXML(process);
-			log.debug(requestString);
-
-			if(serviceMethod.equals("SOAP")) { 
-				//	response = sendSOAP(... );
-				log.error("SOAP version of getProcessStatus has not been implemented");
-				response = sendREST(getStatusEPR, requestString, "EDIT");
-			}
-			else {
-				response = sendREST(getStatusEPR, requestString, "EDIT");
-			}
-		} catch (AxisFault e) {
-			log.error(e.getMessage());
-			//throw new AxisFault(e);
-		} catch (Exception e) {
-			log.error(e.getMessage());
-			throw new Exception(e);
-		}
-		return response;
-	}
-	
-	/**
-	 * Function to send getDirtyState requestVdo to ONT web service
-	 * 
-	 * @param GetReturnType  return parameters 
-	 * @return A String containing the ONT web service response 
-	 */
-	
-	public static String getDirtyState(GetReturnType returnData, String type) throws Exception {
-		String response = null;
-			 try {
-				 GetDirtyStateRequestMessage reqMsg = new GetDirtyStateRequestMessage();
-				 String requestString = reqMsg.doBuildXML(returnData);
-
-				if(serviceMethod.equals("SOAP")) {
-					response = sendSOAP(requestString,"http://rpdr.partners.org/GetCategories", "GetCategories", type );
-				}
-				else {
-					response = sendREST(dirtyStateEPR, requestString, type);
-				}
-	//			log.debug("Ont response = " + response);
-			} catch (AxisFault e) {
-				log.error(e.getMessage());
-				//throw new AxisFault(e);
-			} catch (I2B2Exception e) {
-				log.error(e.getMessage());
-				throw new I2B2Exception(e.getMessage());
-			} catch (Exception e) {
-				log.error(e.getMessage());
-				throw new Exception(e);
-			}
-		return response;
-	}
 	
 
 

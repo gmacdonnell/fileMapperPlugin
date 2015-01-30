@@ -44,6 +44,7 @@ import fileMapper.data.datavo.psm.query.UserType;
 import fileMapper.fileMapperUtil.FileMapperJAXBUtil;
 import fileMapper.fileMapperUtil.Messages;
 import fileMapper.serviceClient.FileMapperRequestClient;
+import fileMapper.ws.FileMapperServiceDriver;
 import edu.harvard.i2b2.eclipse.UserInfoBean;
 
 
@@ -51,7 +52,20 @@ import edu.harvard.i2b2.eclipse.UserInfoBean;
 public class FileMappingMessageEngine {
 	private String xmlStr = null;
 	private String response = null;
-	public  void test01()
+	public static final String FILEMAPPER_URL = "http://144.174.39.18/i2b2/services/FileMapperService";
+	
+	
+	public void test01()
+	{
+		try{
+		String results = FileMapperServiceDriver.getDataTypes(); 
+		Write(results);
+		}catch(Exception e)
+		{
+			Write(e.toString());
+		}
+	}
+	public  void testOld()
 	{
 		
 		String XMLstr = getXmlString();
@@ -60,7 +74,7 @@ public class FileMappingMessageEngine {
 		OMElement payload = getPayLoad(XMLstr);
 		Options options = new Options();
 		//EndpointReference targetEPR = new EndpointReference( UserInfoBean.getInstance().getCellDataUrl("CRC") + "request");
-		EndpointReference targetEPR = new EndpointReference("http://128.186.73.214:9090/i2b2/services/TESTService/request");
+		EndpointReference targetEPR = new EndpointReference(FILEMAPPER_URL);
 		//options.setTo(targetEPR);
 		options.setTo(targetEPR);
 		options.setTransportInProtocol(Constants.TRANSPORT_HTTP);
@@ -89,8 +103,7 @@ public class FileMappingMessageEngine {
 
 			// RPCServiceClient serviceClient = new RPCServiceClient();
 
-			EndpointReference targetEPR = new EndpointReference(
-					"http://128.186.73.214:9090/i2b2/services/TESTService/request");
+			EndpointReference targetEPR = new EndpointReference(FILEMAPPER_URL);
 			 Options options = getOptions();
 			 options.setTo(targetEPR);
 			 sender.setOptions(options);
@@ -109,7 +122,7 @@ public class FileMappingMessageEngine {
 		
 		Options options = getOptions();
 		//EndpointReference targetEPR = new EndpointReference( UserInfoBean.getInstance().getCellDataUrl("CRC") + "request");
-		EndpointReference targetEPR = new EndpointReference("http://128.186.73.214:9090/i2b2/services/TESTService/request");
+		EndpointReference targetEPR = new EndpointReference(FILEMAPPER_URL);
 		options.setTo(targetEPR);
 		
 

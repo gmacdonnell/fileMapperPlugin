@@ -52,9 +52,9 @@ public class FileMapperRequestClient {
 		return lineItem;
 	}
 
-	private static String getCRCNavigatorQueryProcessorServiceName() {
+	private static String getMAPServiceName() {
 
-		return UserInfoBean.getInstance().getCellDataUrl("CRC") + "request";
+		return UserInfoBean.getInstance().getCellDataUrl("MAP") ;
 	}
 
 	public static int processSecurityResult(String response) {
@@ -101,13 +101,13 @@ public class FileMapperRequestClient {
 			o.output(tableDoc, str);
 
 			MessageUtil.getInstance().setRequest(
-					"URL: " + getCRCNavigatorQueryProcessorServiceName() + "\n"
+					"URL: " + getMAPServiceName() + "\n"
 							+ str);
 
 			OMElement payload = getQueryPayLoad(XMLstr);
 			Options options = new Options();
 			targetEPR = new EndpointReference(
-					getCRCNavigatorQueryProcessorServiceName());
+					getMAPServiceName());
 			options.setTo(targetEPR);
 			options.setTo(targetEPR);
 			options.setTransportInProtocol(Constants.TRANSPORT_HTTP);
@@ -130,7 +130,7 @@ public class FileMapperRequestClient {
 			str = new StringWriter();
 			o.output(tableDoc, str);
 			MessageUtil.getInstance().setResponse(
-					"URL: " + getCRCNavigatorQueryProcessorServiceName() + "\n"
+					"URL: " + getMAPServiceName() + "\n"
 							+ str);// result.toString());
 			int timeout = processSecurityResult(result.toString());
 			log.info("get timeout from server: " + timeout + " at: "
