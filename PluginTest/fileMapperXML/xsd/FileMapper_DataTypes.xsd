@@ -11,7 +11,10 @@
     		<element name="table_CD" type="string" maxOccurs="1"
     			minOccurs="1">
     		</element>
-    		<element name="field_set" type="map:DataTypeField" maxOccurs="unbounded" minOccurs="1"></element>
+    		<element name="field_set" type="map:DataTypeField"
+    			maxOccurs="unbounded" minOccurs="1">
+    		</element>
+    		<element name="isDimension" type="boolean"></element>
     	</sequence>
     </complexType>
 
@@ -21,10 +24,45 @@
     		<element name="field_CD" type="string"></element>
     		<element name="dataType" type="int"></element>
     		<element name="isKey" type="boolean"></element>
+    		<element name="isSystemSet" type="boolean"></element>
     	</sequence>
     </complexType>
 
     <element name="get_dataType" type="map:DataType"></element>
 
     <element name="get_dataTypeField" type="map:DataType"></element>
+
+    <complexType name="Keys">
+    	<sequence>
+    		<element name="Table" type="map:DataType" maxOccurs="1"
+    			minOccurs="1">
+    		</element>
+    		<element name="Keys" type="map:DataTypeField" maxOccurs="unbounded" minOccurs="0"></element>
+    	</sequence>
+    </complexType>
+
+    <element name="get_Keys" type="map:GetKeys"></element>
+
+    <complexType name="GetDataTypes">
+    	<sequence>
+    		<element name="Types" type="map:DataType" maxOccurs="unbounded" minOccurs="0"></element>
+    	</sequence>
+    </complexType>
+
+    <element name="get_GetDataTypes" type="map:GetDataTypes"></element>
+
+    <complexType name="Fields">
+    	<sequence>
+    		<element name="Type" type="map:DataType" maxOccurs="1"
+    			minOccurs="1">
+    		</element>
+    		<element name="Fields" type="map:DataTypeField" maxOccurs="unbounded" minOccurs="1"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="GetKeys">
+    	<sequence>
+    		<element name="KeySets" type="map:Keys" maxOccurs="unbounded" minOccurs="0"></element>
+    	</sequence>
+    </complexType>
 </schema>
