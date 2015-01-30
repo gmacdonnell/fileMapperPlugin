@@ -11,8 +11,7 @@
     		<element name="table_CD" type="string" maxOccurs="1"
     			minOccurs="1">
     		</element>
-    		<element name="field_set" type="map:DataTypeField"
-    			maxOccurs="unbounded" minOccurs="1">
+    		<element name="field_set" type="map:DataTypeField"	maxOccurs="unbounded" minOccurs="0">
     		</element>
     		<element name="isDimension" type="boolean"></element>
     	</sequence>
