@@ -18,17 +18,64 @@
 
 	</target>
 
+	<!-- =================================================================== -->
+	<!-- 								DIST 								 -->
+	<!-- =================================================================== -->
+	<target name="dist" depends="gensrcInit,compile" description="package application for distribution/deployment">
 
+		<echo message="${Name}: Creating the archive package!" />
+		<jar destfile="${dist}/${Name}.jar">
+			<fileset dir="${classes}">
+				<!--
+				<exclude name="**/datavo/**" />
+				-->
+			</fileset>
+		</jar>
+	</target>
+	<!-- =================================================================== -->
+	<!-- 								COMPILE 							 -->
+	<!-- =================================================================== -->
+	<target name="compile" depends="gensrcInit,jaxb_gen" description="Compile files without cleaning">
+		<mkdir dir="${classes}" />
+		<javac destdir="${classes}" optimize="${javac.opt}" debug="${javac.debug}" classpath="${genlib}/i2b2Common-core.jar">
+			<src path="${gensrc}" />
+			<src path="${src}/fileMapper"/>
+			
+			<!--	<src path="${src}/test" />  -->
+			<classpath refid="classpath" />
+		</javac>
+	</target>
+	<target name="init" depends="common_init,gensrcInit" description="Prepare for build">
 
+		<path id="classpath">
+			<fileset dir="${lib}">
+				<include name="**/*.jar" />
+			</fileset>
+
+			<fileset dir="${genlib}">
+				<include name="*.jar" />
+			</fileset>
+			<pathelement location="${classes}" />
+		</path>
+
+	<!--  JRE 1.5 style jaxb_gen
+		<taskdef name="xjc" classname="com.sun.tools.xjc.XJCTask">
+			<classpath refid="classpath" />
+		</taskdef>
+	-->
+	</target>
 	<!-- =================================================================== -->
 	<!-- 								CLEAN 								 -->
 	<!-- =================================================================== -->
 	<target name="clean"  description="Clean all build products" >
-    	<delete dir="${dist}"/> 
+    	<!--<delete dir="${dist}"/> 
+    	
     	<delete dir="${gensrc}"/>   
     	<delete dir="${genlib}"/>
     	<mkdir dir="${genlib}"/>
-    	<mkdir dir="${dist}"/>
+    	-->
+    	<!--<mkdir dir="${dist}"/>
+    	-->
     	<mkdir dir="${gensrc}"/>
 	</target>
 
@@ -51,6 +98,6 @@
 	<!-- =================================================================== -->
 	<!-- 								ALL 								 -->
 	<!-- =================================================================== -->
-	<target name="all" depends="jaxb_gen">
+	<target name="all" depends="clean,compile,dist">
 	</target>
 </project>
