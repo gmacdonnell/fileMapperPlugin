@@ -25,11 +25,4 @@
 		<nature>org.eclipse.pde.PluginNature</nature>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>Querygensrc</name>
-			<type>2</type>
-			<location>C:/Projects/WorkspaceWorkBench/edu.harvard.i2b2.eclipse.plugins.query/gensrc</location>
-		</link>
-	</linkedResources>
 </projectDescription>

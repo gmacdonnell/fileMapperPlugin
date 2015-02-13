@@ -1,67 +1,55 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<schema id="FileMapper" xmlns="http://www.w3.org/2001/XMLSchema" 
-		xmlns:map="http://i2b2.idiginfo.fsu.edu/map"
-		targetNamespace="http://i2b2.idiginfo.fsu.edu/map" 	>		
-
-    <complexType name="DataType">
-    	<sequence>
-    		<element name="name" type="string" maxOccurs="1"
-    			minOccurs="1">
-    		</element>
-    		<element name="table_CD" type="string" maxOccurs="1"
-    			minOccurs="1">
-    		</element>
-    		<element name="field_set" type="map:DataTypeField"	maxOccurs="unbounded" minOccurs="0">
-    		</element>
-    		<element name="isDimension" type="boolean"></element>
-    	</sequence>
-    </complexType>
-
-    <complexType name="DataTypeField">
-    	<sequence>
-    		<element name="table_CD" type="string"></element>
-    		<element name="field_CD" type="string"></element>
-    		<element name="dataType" type="int"></element>
-    		<element name="isKey" type="boolean"></element>
-    		<element name="isSystemSet" type="boolean"></element>
-    	</sequence>
-    </complexType>
-
-    <element name="get_dataType" type="map:DataType"></element>
-
-    <element name="get_dataTypeField" type="map:DataType"></element>
-
-    <complexType name="Keys">
-    	<sequence>
-    		<element name="Table" type="map:DataType" maxOccurs="1"
-    			minOccurs="1">
-    		</element>
-    		<element name="Keys" type="map:DataTypeField" maxOccurs="unbounded" minOccurs="0"></element>
-    	</sequence>
-    </complexType>
-
-    <element name="get_Keys" type="map:GetKeys"></element>
-
-    <complexType name="GetDataTypes">
-    	<sequence>
-    		<element name="Types" type="map:DataType" maxOccurs="unbounded" minOccurs="0"></element>
-    	</sequence>
-    </complexType>
-
-    <element name="get_GetDataTypes" type="map:GetDataTypes"></element>
-
-    <complexType name="Fields">
-    	<sequence>
-    		<element name="Type" type="map:DataType" maxOccurs="1"
-    			minOccurs="1">
-    		</element>
-    		<element name="Fields" type="map:DataTypeField" maxOccurs="unbounded" minOccurs="1"></element>
-    	</sequence>
-    </complexType>
-
-    <complexType name="GetKeys">
-    	<sequence>
-    		<element name="KeySets" type="map:Keys" maxOccurs="unbounded" minOccurs="0"></element>
-    	</sequence>
-    </complexType>
-</schema>
+ 20         <xs:complexType name="DataTypeField">
+ 21                 <xs:sequence>
+ 22                         <xs:element name="table_CD" type="xs:string"></xs:element>
+ 23                         <xs:element name="field_CD" type="xs:string"></xs:element>
+ 24                         <xs:element name="dataType" type="xs:string"></xs:element>
+ 25                         <xs:element name="isKey" type="xs:boolean"></xs:element>
+ 26                         <xs:element name="isSystemSet" type="xs:boolean"></xs:element>
+ 27                         <xs:element name="DESCR" type="xs:string"></xs:element>
+ 28                 </xs:sequence>
+ 29         </xs:complexType>
+ 30 
+ 31 
+ 32         <xs:element name="get_dataType" type="map:DataType"></xs:element>
+ 33 
+ 34         <xs:element name="get_dataTypeField" type="map:DataType"></xs:element>
+ 35 
+ 36         <xs:complexType name="Keys">
+ 37                 <xs:sequence>
+ 38                         <xs:element name="Table" type="map:DataType" maxOccurs="1"
+ 39                                 minOccurs="1">
+ 40                         </xs:element>
+ 41                         <xs:element name="Keys" type="map:DataTypeField"
+ 42                                 maxOccurs="unbounded" minOccurs="0"></xs:element>
+ 43                 </xs:sequence>
+ 44         </xs:complexType>
+ 45 
+ 46         <xs:element name="get_Keys" type="map:GetKeys"></xs:element>
+ 47 
+ 48         <xs:complexType name="GetDataTypes">
+ 49                 <xs:sequence>
+ 50                         <xs:element name="Types" type="map:DataType" maxOccurs="unbounded"
+ 51                                 minOccurs="0"></xs:element>
+ 52                 </xs:sequence>
+ 53         </xs:complexType>
+ 54 
+ 55         <xs:element name="get_GetDataTypes" type="map:GetDataTypes"></xs:element>
+ 56 
+ 57         <xs:complexType name="Fields">
+ 58                 <xs:sequence>
+ 59                         <xs:element name="Type" type="map:DataType" maxOccurs="1"
+ 60                                 minOccurs="1">
+ 61                         </xs:element>
+ 62                         <xs:element name="Fields" type="map:DataTypeField"
+ 63                                 maxOccurs="unbounded" minOccurs="1"></xs:element>
+ 64                 </xs:sequence>
+ 65         </xs:complexType>
+ 66 
+ 67         <xs:complexType name="GetKeys">
+ 68                 <xs:sequence>
+ 69                         <xs:element name="KeySets" type="map:Keys" maxOccurs="unbounded"
+ 70                                 minOccurs="0"></xs:element>
+ 71                 </xs:sequence>
+ 72         </xs:complexType>
+ 73 
+ 74 </xs:schema>

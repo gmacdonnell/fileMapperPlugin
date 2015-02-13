@@ -33,14 +33,8 @@ import fileMapper.data.datavo.i2b2message.ProcessingIdType;
 import fileMapper.data.datavo.i2b2message.RequestHeaderType;
 import fileMapper.data.datavo.i2b2message.RequestMessageType;
 import fileMapper.data.datavo.i2b2message.SecurityType;
-import fileMapper.data.datavo.psm.query.PsmQryHeaderType;
-import fileMapper.data.datavo.psm.query.PsmRequestTypeType;
-import fileMapper.data.datavo.psm.query.QueryDefinitionRequestType;
-import fileMapper.data.datavo.psm.query.QueryDefinitionType;
-import fileMapper.data.datavo.psm.query.QueryModeType;
-import fileMapper.data.datavo.psm.query.ResultOutputOptionListType;
-import fileMapper.data.datavo.psm.query.ResultOutputOptionType;
-import fileMapper.data.datavo.psm.query.UserType;
+import fileMapper.data.datavo.vdo.GetDataTypes;
+
 import fileMapper.fileMapperUtil.FileMapperJAXBUtil;
 import fileMapper.fileMapperUtil.Messages;
 import fileMapper.serviceClient.FileMapperRequestClient;
@@ -59,7 +53,11 @@ public class FileMappingMessageEngine {
 	{
 		try{
 		String results = FileMapperServiceDriver.getDataTypes(); 
-		Write(results);
+	GetDataTypes types = FileMapperServiceDriver.extractTypes(results);
+	Write(results.toString());
+	 String secondResults = FileMapperServiceDriver.getKeys(types);
+	 GetDataTypes feilds = FileMapperServiceDriver.extractTypes(secondResults);
+	 Write(secondResults.toString());
 		}catch(Exception e)
 		{
 			Write(e.toString());
@@ -174,7 +172,7 @@ public class FileMappingMessageEngine {
 		// create infotype
 		String queryName = "Test_Query";
 		// *
-		QueryDefinitionType queryDefinitionType = new QueryDefinitionType();
+		/*QueryDefinitionType queryDefinitionType = new QueryDefinitionType();
 		ResultOutputOptionListType resultOutputOptionListType = new ResultOutputOptionListType();
 		// was a loop
 		ResultOutputOptionType resultOutputOptionType = new ResultOutputOptionType();
@@ -245,7 +243,7 @@ public class FileMappingMessageEngine {
 		}
 
 		return strWriter.toString();
-
+*/ return null;
 	}
 	public static OMElement getPayLoad(String XMLstr) throws Exception {
 		StringReader strReader = new StringReader(XMLstr);

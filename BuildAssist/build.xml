@@ -103,7 +103,11 @@
    					         <include name="*.jar"/>
    			              </fileset>
    			</copy>
-   		
+ 	<copy todir="../PluginTest/${genlib}">
+   			       	      <fileset dir="../edu.harvard.i2b2.common/${dist}">
+   					         <include name="*.jar"/>
+   			              </fileset>
+   			</copy>
     	<!-- ant call client's build.xml for jaxb_gen -->
 		<subant target="all">
 				<fileset dir="../edu.harvard.i2b2.common" includes="build.xml" />
@@ -122,6 +126,7 @@
 			<fileset dir="../edu.harvard.i2b2.eclipse.plugins.patientSet/buildFiles" includes="build.xml" />
     		<fileset dir="../edu.harvard.i2b2.eclipse.plugins.importData/buildFiles" includes="build.xml" />
     		<fileset dir="../edu.fsu.idiginfo.i2b2.plugin.fileMapping/buildFiles" includes="build.xml" />
+    		<fileset dir="../PluginTest/buildFiles" includes="build.xml" />
     	</subant>	
 
     </target>

@@ -61,24 +61,24 @@ abstract public class FileMapperRequestData {
 	public MessageHeaderType getMessageHeader() {
 		MessageHeaderType messageHeader = new MessageHeaderType();
 		
-		messageHeader.setI2B2VersionCompatible(new BigDecimal(Messages.getString("OntologyRequestData.i2b2VersionCompatible"))); //$NON-NLS-1$
+		messageHeader.setI2B2VersionCompatible(new BigDecimal(Messages.getString("FileMapperRequestData.i2b2VersionCompatible"))); //$NON-NLS-1$
 
 		ApplicationType appType = new ApplicationType();
-		appType.setApplicationName(Messages.getString("OntologyRequestData.SendingApplicationName")); //$NON-NLS-1$
-		appType.setApplicationVersion(Messages.getString("OntologyRequestData.SendingApplicationVersion"));  //$NON-NLS-1$
+		appType.setApplicationName(Messages.getString("FileMapperRequestData.SendingApplicationName")); //$NON-NLS-1$
+		appType.setApplicationVersion(Messages.getString("FileMapperRequestData.SendingApplicationVersion"));  //$NON-NLS-1$
 		messageHeader.setSendingApplication(appType);
 		
 		FacilityType facility = new FacilityType();
-		facility.setFacilityName(Messages.getString("OntologyRequestData.SendingFacilityName")); //$NON-NLS-1$
+		facility.setFacilityName(Messages.getString("FileMapperRequestData.SendingFacilityName")); //$NON-NLS-1$
 		messageHeader.setSendingFacility(facility);
 		
 		ApplicationType appType2 = new ApplicationType();
-		appType2.setApplicationVersion(Messages.getString("OntologyRequestData.ReceivingApplicationVersion")); //$NON-NLS-1$
-		appType2.setApplicationName(Messages.getString("OntologyRequestData.ReceivingApplicationName"));		 //$NON-NLS-1$
+		appType2.setApplicationVersion(Messages.getString("FileMapperRequestData.ReceivingApplicationVersion")); //$NON-NLS-1$
+		appType2.setApplicationName(Messages.getString("FileMapperRequestData.ReceivingApplicationName"));		 //$NON-NLS-1$
 		messageHeader.setReceivingApplication(appType2);
 	
 		FacilityType facility2 = new FacilityType();
-		facility2.setFacilityName(Messages.getString("OntologyRequestData.ReceivingFacilityName")); //$NON-NLS-1$
+		facility2.setFacilityName(Messages.getString("FileMapperRequestData.ReceivingFacilityName")); //$NON-NLS-1$
 		messageHeader.setReceivingFacility(facility2);
 
 		Date currentDate = new Date();
@@ -102,13 +102,13 @@ abstract public class FileMapperRequestData {
 		messageHeader.setMessageControlId(mcIdType);
 
 		ProcessingIdType proc = new ProcessingIdType();
-		proc.setProcessingId(Messages.getString("OntologyRequestData.ProcessingId")); //$NON-NLS-1$
-		proc.setProcessingMode(Messages.getString("OntologyRequestData.ProcessingMode")); //$NON-NLS-1$
+		proc.setProcessingId(Messages.getString("FileMapperRequestData.ProcessingId")); //$NON-NLS-1$
+		proc.setProcessingMode(Messages.getString("FileMapperRequestData.ProcessingMode")); //$NON-NLS-1$
 		messageHeader.setProcessingId(proc);
 		
-		messageHeader.setAcceptAcknowledgementType(Messages.getString("OntologyRequestData.AcceptAcknowledgementType")); //$NON-NLS-1$
-		messageHeader.setApplicationAcknowledgementType(Messages.getString("OntologyRequestData.ApplicationAcknowledgementType")); //$NON-NLS-1$
-		messageHeader.setCountryCode(Messages.getString("OntologyRequestData.CountryCode")); //$NON-NLS-1$
+		messageHeader.setAcceptAcknowledgementType(Messages.getString("FileMapperRequestData.AcceptAcknowledgementType")); //$NON-NLS-1$
+		messageHeader.setApplicationAcknowledgementType(Messages.getString("FileMapperRequestData.ApplicationAcknowledgementType")); //$NON-NLS-1$
+		messageHeader.setCountryCode(Messages.getString("FileMapperRequestData.CountryCode")); //$NON-NLS-1$
 		messageHeader.setProjectId(UserInfoBean.getInstance().getProjectId());
 		return messageHeader;
 	}

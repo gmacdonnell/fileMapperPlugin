@@ -22,10 +22,8 @@ package fileMapper.fileMapperUtil;
 public class JAXBConstant {
     public static final String[] DEFAULT_PACKAGE_NAME = new String[] {
             "fileMapper.data.datavo.i2b2message",
-            "fileMapper.data.datavo.i2b2result",
             "fileMapper.data.datavo.vdo",
-            "fileMapper.data.datavo.pdo.query",
-            "fileMapper.data.datavo.psm.query"
+
         };
     
     public static final String[] DND_PACKAGE_NAME = new String[] {

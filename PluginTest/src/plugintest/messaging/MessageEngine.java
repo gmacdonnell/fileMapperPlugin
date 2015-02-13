@@ -19,26 +19,21 @@ import org.apache.axis2.transport.http.HTTPConstants;
 
 import plugintest.datavo.testJAXBUtil;
 
-import edu.harvard.i2b2.crcxmljaxb.datavo.i2b2message.ApplicationType;
-import edu.harvard.i2b2.crcxmljaxb.datavo.i2b2message.BodyType;
-import edu.harvard.i2b2.crcxmljaxb.datavo.i2b2message.FacilityType;
-import edu.harvard.i2b2.crcxmljaxb.datavo.i2b2message.InfoType;
-import edu.harvard.i2b2.crcxmljaxb.datavo.i2b2message.MessageControlIdType;
-import edu.harvard.i2b2.crcxmljaxb.datavo.i2b2message.MessageHeaderType;
-import edu.harvard.i2b2.crcxmljaxb.datavo.i2b2message.MessageTypeType;
-import edu.harvard.i2b2.crcxmljaxb.datavo.i2b2message.PasswordType;
-import edu.harvard.i2b2.crcxmljaxb.datavo.i2b2message.ProcessingIdType;
-import edu.harvard.i2b2.crcxmljaxb.datavo.i2b2message.RequestHeaderType;
-import edu.harvard.i2b2.crcxmljaxb.datavo.i2b2message.RequestMessageType;
-import edu.harvard.i2b2.crcxmljaxb.datavo.i2b2message.SecurityType;
-import edu.harvard.i2b2.crcxmljaxb.datavo.psm.query.PsmQryHeaderType;
-import edu.harvard.i2b2.crcxmljaxb.datavo.psm.query.PsmRequestTypeType;
-import edu.harvard.i2b2.crcxmljaxb.datavo.psm.query.QueryDefinitionRequestType;
-import edu.harvard.i2b2.crcxmljaxb.datavo.psm.query.QueryDefinitionType;
-import edu.harvard.i2b2.crcxmljaxb.datavo.psm.query.QueryModeType;
-import edu.harvard.i2b2.crcxmljaxb.datavo.psm.query.ResultOutputOptionListType;
-import edu.harvard.i2b2.crcxmljaxb.datavo.psm.query.ResultOutputOptionType;
-import edu.harvard.i2b2.crcxmljaxb.datavo.psm.query.UserType;
+import fileMapper.data.datavo.i2b2message.ApplicationType;
+import fileMapper.data.datavo.i2b2message.BodyType;
+import fileMapper.data.datavo.i2b2message.FacilityType;
+import fileMapper.data.datavo.i2b2message.InfoType;
+import fileMapper.data.datavo.i2b2message.MessageControlIdType;
+import fileMapper.data.datavo.i2b2message.MessageHeaderType;
+import fileMapper.data.datavo.i2b2message.MessageTypeType;
+import fileMapper.data.datavo.i2b2message.PasswordType;
+import fileMapper.data.datavo.i2b2message.ProcessingIdType;
+import fileMapper.data.datavo.i2b2message.RequestHeaderType;
+import fileMapper.data.datavo.i2b2message.RequestMessageType;
+import fileMapper.data.datavo.i2b2message.SecurityType;
+import fileMapper.fileMapperUtil.FileMapperJAXBUtil;
+
+
 import edu.harvard.i2b2.eclipse.UserInfoBean;
 import edu.harvard.i2b2.eclipse.plugins.query.utils.Messages;
 import edu.harvard.i2b2.query.serviceClient.QueryRequestClient;
@@ -156,42 +151,15 @@ public class MessageEngine {
 		// create infotype
 		String queryName = "Test_Query";
 		// *
-		QueryDefinitionType queryDefinitionType = new QueryDefinitionType();
-		ResultOutputOptionListType resultOutputOptionListType = new ResultOutputOptionListType();
-		// was a loop
-		ResultOutputOptionType resultOutputOptionType = new ResultOutputOptionType();
-		resultOutputOptionType.setName("patient_count_xml");
-		// );
-		resultOutputOptionType.setPriorityIndex(new Integer(1));
-		resultOutputOptionListType.getResultOutput()
-				.add(resultOutputOptionType);
-		// end loop
-		QueryDefinitionRequestType queryDefinitionRequestType = new QueryDefinitionRequestType();
+		
 		// *
 		InfoType infoType = new InfoType();
 		infoType.setValue("INFO");
 		infoType.setUrl("http://www.ibm.com");
 
 		// create header
-		PsmQryHeaderType headerType = new PsmQryHeaderType();
-
-		UserType userType = new UserType();
-		userType.setLogin(UserInfoBean.getInstance().getUserName());
-	//	userType.setLogin("@");
-		userType.setGroup(System.getProperty("projectName"));
-		//userType.setValue(UserInfoBean.getInstance().getUserName());
-		userType.setValue("@");
-		headerType.setUser(userType);
-		headerType.setRequestType(PsmRequestTypeType.CRC_QRY_RUN_QUERY_INSTANCE_FROM_QUERY_DEFINITION);
-	//	headerType.setRequestType(PsmRequestTypeType.CRC_QRY_GET_MAP_PLUGIN_REQUIRED_FIELDS);
-
-		headerType.setQueryMode(QueryModeType.OPTIMIZE_WITHOUT_TEMP_TABLE);
-
-		queryDefinitionType.setQueryName(queryName);
-		queryDefinitionType.setQueryTiming("ANY");
-		queryDefinitionRequestType.setQueryDefinition(queryDefinitionType);
-		queryDefinitionRequestType
-				.setResultOutputList(resultOutputOptionListType);
+		
+		
 
 		RequestHeaderType requestHeader = new RequestHeaderType();
 
@@ -203,21 +171,21 @@ public class MessageEngine {
 		}
 
 		BodyType bodyType = new BodyType();
-		edu.harvard.i2b2.crcxmljaxb.datavo.psm.query.ObjectFactory psmOf = new edu.harvard.i2b2.crcxmljaxb.datavo.psm.query.ObjectFactory();
-		bodyType.getAny().add(psmOf.createPsmheader(headerType));
-		bodyType.getAny().add(psmOf.createRequest(queryDefinitionRequestType));
-
+		/*fileMapper.data.datavo.psm.query.ObjectFactory Of = new fileMapper.data.datavo.psm.query.ObjectFactory();
+		bodyType.getAny().add(Of.createPsmheader(headerType));
+		bodyType.getAny().add(Of.createRequest(queryDefinitionRequestType));
+*/
 		MessageHeaderType messageHeader = getMessageHeader();
 		RequestMessageType requestMessageType = new RequestMessageType();
 		requestMessageType.setMessageBody(bodyType);
 		requestMessageType.setMessageHeader(messageHeader);
 		requestMessageType.setRequestHeader(requestHeader);
 
-		edu.harvard.i2b2.common.util.jaxb.JAXBUtil jaxbUtil = testJAXBUtil.getJAXBUtil();
+		edu.harvard.i2b2.common.util.jaxb.JAXBUtil jaxbUtil = FileMapperJAXBUtil.getJAXBUtil();
 		//edu.harvard.i2b2.common.util.jaxb.JAXBUtil jaxbUtil = new edu.harvard.i2b2.common.util.jaxb.JAXBUtil(				JAXBConstant.DEFAULT_PACKAGE_NAME);
 		StringWriter strWriter = new StringWriter();
 		try {
-			edu.harvard.i2b2.crcxmljaxb.datavo.i2b2message.ObjectFactory of = new edu.harvard.i2b2.crcxmljaxb.datavo.i2b2message.ObjectFactory();
+			fileMapper.data.datavo.i2b2message.ObjectFactory of = new fileMapper.data.datavo.i2b2message.ObjectFactory();
 			JAXBElement<RequestMessageType> RMT = of
 					.createRequest(requestMessageType);
 			//jaxbUtil.marshallerWithCDATA(RMT, strWriter,	new String[] { "value_constraint" });
