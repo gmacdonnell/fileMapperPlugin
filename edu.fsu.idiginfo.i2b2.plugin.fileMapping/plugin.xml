@@ -15,6 +15,11 @@
             class="edu.fsu.idiginfo.i2b2.plugin.filemapping.views.SampleView"
             id="edu.fsu.idiginfo.i2b2.plugin.filemapping.views.SampleView">
       </view>
+      <view
+            class="edu.fsu.idiginfo.i2b2.fileMapper.fileMapViews.ColumnLabels"
+            id="edu.fsu.idiginfo.i2b2.fileMapper.fileMapViews.ColumnLabels"
+            name="New ViewPart">
+      </view>
    </extension>
    <extension
          point="org.eclipse.ui.perspectiveExtensions">

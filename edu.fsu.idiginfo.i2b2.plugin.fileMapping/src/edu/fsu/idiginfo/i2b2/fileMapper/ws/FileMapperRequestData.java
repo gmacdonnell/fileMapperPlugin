@@ -153,7 +153,7 @@ abstract public class FileMapperRequestData {
 		StringWriter strWriter = null;
 		try {
 			strWriter = new StringWriter();
-			fileMapper.data.datavo.i2b2message.ObjectFactory of = new fileMapper.data.datavo.i2b2message.ObjectFactory();
+			edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.i2b2message.ObjectFactory of = new edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.i2b2message.ObjectFactory();
 			FileMapperJAXBUtil.getJAXBUtil().marshaller(of.createRequest(reqMessageType), strWriter);
 		} catch (JAXBUtilException e) {
 			log.error("Error marshalling Ont request message");

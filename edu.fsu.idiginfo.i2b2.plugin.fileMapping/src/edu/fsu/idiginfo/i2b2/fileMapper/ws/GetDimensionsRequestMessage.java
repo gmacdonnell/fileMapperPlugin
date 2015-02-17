@@ -48,7 +48,7 @@ public class GetDimensionsRequestMessage extends FileMapperRequestData {
 	
 	public BodyType getBodyType() {
 		DataType returnType = getDataType();
-		fileMapper.data.datavo.vdo.ObjectFactory of = new fileMapper.data.datavo.vdo.ObjectFactory();
+		edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.ObjectFactory of = new edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.ObjectFactory();
 		
 		BodyType bodyType = new BodyType();
 		bodyType.getAny().add(of.createGetDataType(returnType));
@@ -63,7 +63,7 @@ public class GetDimensionsRequestMessage extends FileMapperRequestData {
 	 */
 	
 	public BodyType getBodyType(DataType returnType) {
-		fileMapper.data.datavo.vdo.ObjectFactory of = new fileMapper.data.datavo.vdo.ObjectFactory();
+		edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.ObjectFactory of = new edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.ObjectFactory();
 		
 		BodyType bodyType = new BodyType();
 		bodyType.getAny().add(of.createGetDataType(returnType));

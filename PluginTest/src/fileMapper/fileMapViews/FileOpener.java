@@ -1,4 +1,4 @@
-package fileMapViews;
+package fileMapper.fileMapViews;
 
 import javax.swing.JFileChooser;
 import javax.swing.JPanel;

@@ -24,7 +24,7 @@ import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.i2b2message.RequestHeaderTyp
 import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.i2b2message.RequestMessageType;
 import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.DataType;
 import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.GetDataTypes;
-import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.GetReturnType;
+
 
 
 public class GetDataTypesRequestMessage extends FileMapperRequestData {
@@ -39,10 +39,7 @@ public class GetDataTypesRequestMessage extends FileMapperRequestData {
 	 * 
 	 * @return GetReturnType object
 	 */
-	public GetReturnType getReturnType() { 
-		GetReturnType returnType = new GetReturnType();		
-		return returnType;
-	}
+
 	
 	
 	
@@ -55,7 +52,7 @@ public class GetDataTypesRequestMessage extends FileMapperRequestData {
 	
 	public BodyType getBodyType() {
 		
-		fileMapper.data.datavo.vdo.ObjectFactory of = new fileMapper.data.datavo.vdo.ObjectFactory();
+		edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.ObjectFactory of = new edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.ObjectFactory();
 		
 		BodyType bodyType = new BodyType();
 		bodyType.getAny().add(of.createDataType());
@@ -69,7 +66,7 @@ public class GetDataTypesRequestMessage extends FileMapperRequestData {
 	 * @return BodyType object
 	 */
 	public BodyType getBodyType(GetDataTypes dataTypes) {
-		fileMapper.data.datavo.vdo.ObjectFactory of = new fileMapper.data.datavo.vdo.ObjectFactory();
+		edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.ObjectFactory of = new edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.ObjectFactory();
 		BodyType bodyType = new BodyType();
 		if(dataTypes == null)
 		{
@@ -80,7 +77,7 @@ public class GetDataTypesRequestMessage extends FileMapperRequestData {
 		return bodyType;
 	}
 public BodyType getBodyType(DataType dataType) {
-		fileMapper.data.datavo.vdo.ObjectFactory of = new fileMapper.data.datavo.vdo.ObjectFactory();
+	edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.ObjectFactory of = new edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.ObjectFactory();
 		
 		BodyType bodyType = new BodyType();
 		bodyType.getAny().add(of.createGetDataType(dataType));

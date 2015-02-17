@@ -15,13 +15,3 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6,
 Bundle-Vendor: edu.fsu.idiginfo
 Bundle-ClassPath: .,
  genlib/i2b2Common-core.jar
-Export-Package: edu.fsu.idiginfo.i2b2.filemapping.Data,
- edu.fsu.idiginfo.i2b2.filemapping.requiredfields,
- edu.fsu.idiginfo.i2b2.fmpclient.datavo.psm.query,
- edu.fsu.idiginfo.i2b2.fmpclient.datavo.requiredFields,
- edu.fsu.idiginfo.i2b2.plugin.filemapping,
- edu.fsu.idiginfo.i2b2.plugin.filemapping.util,
- edu.fsu.idiginfo.i2b2.plugin.filemapping.views,
- edu.fsu.idiginfo.i2b2.plugin.filemapping.ws,
- org.i2b2.xsd.cell.crc.psm.analysisdefinition._1,
- org.i2b2.xsd.cell.crc.psm.querydefinition._1
