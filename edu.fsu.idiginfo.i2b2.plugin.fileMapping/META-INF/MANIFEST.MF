@@ -9,9 +9,20 @@ Require-Bundle: org.eclipse.core.runtime,
  edu.harvard.i2b2.eclipse.plugins.webservicesAxis2;bundle-version="1.1.0",
  edu.harvard.i2b2.eclipse.plugins.xml_support_jaxb;bundle-version="2.1.2",
  edu.harvard.i2b2.eclipse.plugins.commons_apache;bundle-version="1.0.4",
- org.apache.commons.logging;bundle-version="1.1.1"
+ org.apache.commons.logging;bundle-version="1.1.1",
+ org.eclipse.ui.forms;bundle-version="3.5.101"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6,
  JavaSE-1.7
 Bundle-Vendor: edu.fsu.idiginfo
 Bundle-ClassPath: .,
  genlib/i2b2Common-core.jar
+Import-Package: com.jgoodies.forms.factories,
+ com.jgoodies.forms.layout
+Export-Package: edu.fsu.idiginfo.i2b2.fileMapper.fileMapViews;
+  uses:="com.jgoodies.forms.layout,
+   edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo,
+   org.eclipse.swt.widgets,
+   edu.fsu.idiginfo.i2b2.fileMapper.fileMapperUtil,
+   edu.fsu.idiginfo.i2b2.fileMapper.fileMapperUtil.UI,
+   org.eclipse.ui.part,
+   javax.swing"

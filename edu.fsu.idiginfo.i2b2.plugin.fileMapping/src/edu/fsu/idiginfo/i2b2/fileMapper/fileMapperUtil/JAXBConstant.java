@@ -21,12 +21,12 @@ package edu.fsu.idiginfo.i2b2.fileMapper.fileMapperUtil;
  */
 public class JAXBConstant {
     public static final String[] DEFAULT_PACKAGE_NAME = new String[] {
-            "fileMapper.data.datavo.i2b2message",
-            "fileMapper.data.datavo.vdo",
+            "edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.i2b2message",
+            "edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo",
 
         };
     
     public static final String[] DND_PACKAGE_NAME = new String[] {
-               "fileMapper.data.datavo.vdo"
+               "edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo"
     };
 }

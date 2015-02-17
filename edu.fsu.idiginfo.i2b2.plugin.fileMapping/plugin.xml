@@ -6,19 +6,28 @@
          point="org.eclipse.ui.views">
       <category
             name="FileMapping"
-            id="edu.fsu.idiginfo.i2b2.plugin.fileMapping">
+            id="edu.fsu.idiginfo.i2b2.fileMapping">
       </category>
       <view
-            name="Test View"
+            name="ColumnMapping"
             icon="icons/sample.gif"
-            category="edu.fsu.idiginfo.i2b2.plugin.fileMapping"
-            class="edu.fsu.idiginfo.i2b2.plugin.filemapping.views.SampleView"
-            id="edu.fsu.idiginfo.i2b2.plugin.filemapping.views.SampleView">
+            category="edu.fsu.idiginfo.i2b2.fileMapping"
+            class="edu.fsu.idiginfo.i2b2.fileMapper.fileMapViews.ColumnMappingView"
+            id="edu.fsu.idiginfo.i2b2.fileMapper.fileMapViews.ColumnMappingView">
       </view>
       <view
+      		name="ColumnLables"
+      		category="edu.fsu.idiginfo.i2b2.fileMapping"
             class="edu.fsu.idiginfo.i2b2.fileMapper.fileMapViews.ColumnLabels"
-            id="edu.fsu.idiginfo.i2b2.fileMapper.fileMapViews.ColumnLabels"
-            name="New ViewPart">
+            id="edu.fsu.idiginfo.i2b2.fileMapper.fileMapViews.ColumnLabels">
+      </view>
+  
+     
+      <view
+      		name="Testing"
+            category="edu.fsu.idiginfo.i2b2.fileMapping"
+            class="edu.fsu.idiginfo.i2b2.fileMapper.fileMapViews.ViewTesting"
+            id="edu.fsu.idiginfo.i2b2.fileMapper.fileMapViews.ViewTesting">
       </view>
    </extension>
    <extension
@@ -29,7 +38,7 @@
                ratio="0.5"
                relative="org.eclipse.ui.views.TaskList"
                relationship="right"
-               id="edu.fsu.idiginfo.i2b2.plugin.filemapping.views.SampleView">
+               id="edu.fsu.idiginfo.i2b2.fileMapper.fileMapViews.ColumnMappingView">
          </view>
       </perspectiveExtension>
    </extension>
