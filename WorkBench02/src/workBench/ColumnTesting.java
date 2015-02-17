@@ -54,19 +54,6 @@ public class ColumnTesting {
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new BorderLayout(0, 0));
-		
-		JPanel panel = new JPanel();
-		panel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		frame.getContentPane().add(panel, BorderLayout.WEST);
-		
-		DataTypes dataTypes = new DataTypes();
-		panel.add(dataTypes);
-		
-		JScrollPane scrollPane = new JScrollPane();
-		frame.getContentPane().add(scrollPane, BorderLayout.CENTER);
-		
-		DataTypes dataTypes_1 = new DataTypes();
-		scrollPane.setViewportView(dataTypes_1);
 	
 		
 
