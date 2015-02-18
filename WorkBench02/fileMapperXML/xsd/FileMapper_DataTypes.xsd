@@ -23,4 +23,25 @@
     		<element name="isKey" type="boolean"></element>
     	</sequence>
     </complexType>
+
+    <complexType name="Map">
+    	<sequence>
+    		<element name="MAP_ID" type="string" maxOccurs="1" minOccurs="1"></element>
+    		<element name="SOURCE_ID" type="string" maxOccurs="1" minOccurs="1"></element>
+    		<element name="DESCR" type="string"></element>
+    		<element name="ELEMENTS" type="map:MAP_ELEMENT" maxOccurs="unbounded" minOccurs="0"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="MAP_ELEMENT">
+    	<sequence>
+    		<element name="ELEMENT_ID" type="string" maxOccurs="1" minOccurs="1"></element>
+    		<element name="COLUMN_INDEX" type="int" maxOccurs="1" minOccurs="1"></element>
+    		<element name="ACTIVE" type="string" maxOccurs="1" minOccurs="1"></element>
+    		<element name="TARGET_TABLE" type="string" maxOccurs="1" minOccurs="1"></element>
+    		<element name="FIELD_NAME" type="string" maxOccurs="1" minOccurs="1"></element>
+    	</sequence>
+    </complexType>
+    
+
 </schema>
