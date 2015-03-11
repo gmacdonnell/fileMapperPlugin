@@ -7,5 +7,11 @@
 	<classpathentry exported="true" kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
 	<classpathentry exported="true" kind="lib" path="/edu.harvard.i2b2.common/dist/i2b2Common-core.jar" sourcepath="/edu.harvard.i2b2.common/src"/>
 	<classpathentry kind="lib" path="lib/jdom.jar"/>
+	<classpathentry kind="lib" path="C:/Projects/DevelopmentEnvironments/eclipse/Eclipse 3.7/eclipse/plugins/org.springframework.beans_4.0.2.20140223-RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Projects/DevelopmentEnvironments/eclipse/Eclipse 3.7/eclipse/plugins/org.springframework.context.support_4.0.2.20140223-RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Projects/DevelopmentEnvironments/eclipse/Eclipse 3.7/eclipse/plugins/org.springframework.context_4.0.2.20140223-RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Projects/DevelopmentEnvironments/eclipse/Eclipse 3.7/eclipse/plugins/org.springframework.core_4.0.2.20140223-RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Projects/DevelopmentEnvironments/eclipse/Eclipse 3.7/eclipse/plugins/org.springframework.data.core_1.7.0.20140120-CI.jar"/>
+	<classpathentry kind="lib" path="C:/Projects/DevelopmentEnvironments/eclipse/Eclipse 3.7/eclipse/plugins/org.springframework.expression_4.0.2.20140223-RELEASE.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

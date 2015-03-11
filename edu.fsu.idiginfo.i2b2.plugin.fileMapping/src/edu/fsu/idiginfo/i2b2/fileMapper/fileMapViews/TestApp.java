@@ -1,22 +1,19 @@
-package fileMapViews;
+package edu.fsu.idiginfo.i2b2.fileMapper.fileMapViews;
 
 import java.awt.EventQueue;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JFrame;
 
-import org.springframework.context.ApplicationContext; 
-
-import org.springframework.context.support.ClassPathXmlApplicationContext; 
-
-import Testing.HelloWorldService;
-
-  
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 
-  
+import org.springframework.beans.factory.config.ListFactoryBean;
 
-
-public class TestSpring {
+import edu.fsu.idiginfo.i2b2.fileMapper.fileMapperUtil.IFileParser;
+public class TestApp {
 
 	private JFrame frame;
 
@@ -27,16 +24,18 @@ public class TestSpring {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-
 					ApplicationContext context = new ClassPathXmlApplicationContext( "applicationContext.xml"); 
 
-					 HelloWorldService obj = (HelloWorldService) context.getBean("helloWorldService"); 
+					 List<IFileParser> list = (List) context.getBean("FileParserList"); 
 
 					   
-					    String message =obj.sayHello(); 
-					    	System.out.println(message); 
-
-					TestSpring window = new TestSpring();
+					
+					  for(int index = 0; index < list.size() ; index ++)
+					  {
+					   
+						 IFileParser parser = (IFileParser) obj.getObject().get(index);
+					  }
+					TestApp window = new TestApp();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -48,7 +47,7 @@ public class TestSpring {
 	/**
 	 * Create the application.
 	 */
-	public TestSpring() {
+	public TestApp() {
 		initialize();
 	}
 

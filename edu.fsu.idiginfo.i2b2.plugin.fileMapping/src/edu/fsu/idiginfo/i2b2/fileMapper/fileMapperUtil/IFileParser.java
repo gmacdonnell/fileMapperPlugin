@@ -18,7 +18,6 @@ public interface IFileParser extends IStructuredContentProvider{
 	public String[][] getItems();
 	public Column getColumn();
 	public String toString();
-	}
 	
-
 }
+
