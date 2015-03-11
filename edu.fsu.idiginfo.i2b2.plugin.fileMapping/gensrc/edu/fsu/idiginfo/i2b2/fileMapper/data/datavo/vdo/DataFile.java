@@ -6,7 +6,7 @@
 //
 
 
-package edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.i2b2message;
+package edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -15,16 +15,16 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for request_headerType complex type.
+ * <p>Java class for DataFile complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="request_headerType">
+ * &lt;complexType name="DataFile">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="result_waittime_ms" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *         &lt;element name="ID" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -34,28 +34,36 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "request_headerType", propOrder = {
-    "resultWaittimeMs"
+@XmlType(name = "DataFile", propOrder = {
+    "id"
 })
-public class RequestHeaderType {
+public class DataFile {
 
-    @XmlElement(name = "result_waittime_ms")
-    protected int resultWaittimeMs;
+    @XmlElement(name = "ID", required = true)
+    protected String id;
 
     /**
-     * Gets the value of the resultWaittimeMs property.
+     * Gets the value of the id property.
      * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public int getResultWaittimeMs() {
-        return resultWaittimeMs;
+    public String getID() {
+        return id;
     }
 
     /**
-     * Sets the value of the resultWaittimeMs property.
+     * Sets the value of the id property.
      * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
-    public void setResultWaittimeMs(int value) {
-        this.resultWaittimeMs = value;
+    public void setID(String value) {
+        this.id = value;
     }
 
 }

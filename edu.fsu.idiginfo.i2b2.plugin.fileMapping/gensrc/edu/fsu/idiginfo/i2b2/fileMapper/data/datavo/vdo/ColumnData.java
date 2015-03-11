@@ -17,16 +17,17 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for GetDataTypes complex type.
+ * <p>Java class for ColumnData complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="GetDataTypes">
+ * &lt;complexType name="ColumnData">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="Types" type="{http://www.fsu.edu/data/datavo/vdo/}DataType" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="column" type="{http://www.fsu.edu/data/datavo/vdo/}Column"/>
+ *         &lt;element name="values" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -36,41 +37,67 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "GetDataTypes", propOrder = {
-    "types"
+@XmlType(name = "ColumnData", propOrder = {
+    "column",
+    "values"
 })
-public class GetDataTypes {
+public class ColumnData {
 
-    @XmlElement(name = "Types")
-    protected List<DataType> types;
+    @XmlElement(required = true)
+    protected Column column;
+    protected List<String> values;
 
     /**
-     * Gets the value of the types property.
+     * Gets the value of the column property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Column }
+     *     
+     */
+    public Column getColumn() {
+        return column;
+    }
+
+    /**
+     * Sets the value of the column property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Column }
+     *     
+     */
+    public void setColumn(Column value) {
+        this.column = value;
+    }
+
+    /**
+     * Gets the value of the values property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the types property.
+     * This is why there is not a <CODE>set</CODE> method for the values property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getTypes().add(newItem);
+     *    getValues().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link DataType }
+     * {@link String }
      * 
      * 
      */
-    public List<DataType> getTypes() {
-        if (types == null) {
-            types = new ArrayList<DataType>();
+    public List<String> getValues() {
+        if (values == null) {
+            values = new ArrayList<String>();
         }
-        return this.types;
+        return this.values;
     }
 
 }

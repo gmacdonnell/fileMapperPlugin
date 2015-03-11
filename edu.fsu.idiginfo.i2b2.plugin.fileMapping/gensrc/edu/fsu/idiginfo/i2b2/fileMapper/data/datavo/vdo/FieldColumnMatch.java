@@ -6,7 +6,7 @@
 //
 
 
-package edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.i2b2message;
+package edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -15,17 +15,17 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for response_headerType complex type.
+ * <p>Java class for FieldColumnMatch complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="response_headerType">
+ * &lt;complexType name="FieldColumnMatch">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="info" type="{http://www.i2b2.org/xsd/hive/msg/1.1/}infoType"/>
- *         &lt;element name="result_status" type="{http://www.i2b2.org/xsd/hive/msg/1.1/}result_statusType"/>
+ *         &lt;element name="DataField" type="{http://www.fsu.edu/data/datavo/vdo/}DataTypeField"/>
+ *         &lt;element name="Columns" type="{http://www.fsu.edu/data/datavo/vdo/}ColumnMatch"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -35,63 +35,63 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "response_headerType", propOrder = {
-    "info",
-    "resultStatus"
+@XmlType(name = "FieldColumnMatch", propOrder = {
+    "dataField",
+    "columns"
 })
-public class ResponseHeaderType {
+public class FieldColumnMatch {
 
-    @XmlElement(required = true)
-    protected InfoType info;
-    @XmlElement(name = "result_status", required = true)
-    protected ResultStatusType resultStatus;
+    @XmlElement(name = "DataField", required = true)
+    protected DataTypeField dataField;
+    @XmlElement(name = "Columns", required = true)
+    protected ColumnMatch columns;
 
     /**
-     * Gets the value of the info property.
+     * Gets the value of the dataField property.
      * 
      * @return
      *     possible object is
-     *     {@link InfoType }
+     *     {@link DataTypeField }
      *     
      */
-    public InfoType getInfo() {
-        return info;
+    public DataTypeField getDataField() {
+        return dataField;
     }
 
     /**
-     * Sets the value of the info property.
+     * Sets the value of the dataField property.
      * 
      * @param value
      *     allowed object is
-     *     {@link InfoType }
+     *     {@link DataTypeField }
      *     
      */
-    public void setInfo(InfoType value) {
-        this.info = value;
+    public void setDataField(DataTypeField value) {
+        this.dataField = value;
     }
 
     /**
-     * Gets the value of the resultStatus property.
+     * Gets the value of the columns property.
      * 
      * @return
      *     possible object is
-     *     {@link ResultStatusType }
+     *     {@link ColumnMatch }
      *     
      */
-    public ResultStatusType getResultStatus() {
-        return resultStatus;
+    public ColumnMatch getColumns() {
+        return columns;
     }
 
     /**
-     * Sets the value of the resultStatus property.
+     * Sets the value of the columns property.
      * 
      * @param value
      *     allowed object is
-     *     {@link ResultStatusType }
+     *     {@link ColumnMatch }
      *     
      */
-    public void setResultStatus(ResultStatusType value) {
-        this.resultStatus = value;
+    public void setColumns(ColumnMatch value) {
+        this.columns = value;
     }
 
 }

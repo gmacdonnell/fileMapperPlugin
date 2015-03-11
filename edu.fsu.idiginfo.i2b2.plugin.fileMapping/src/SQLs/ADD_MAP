@@ -1,0 +1,17 @@
+CREATE OR REPLACE PROCEDURE ADD_MAP(
+  SOURCE_ID IN VARCHAR2,
+  DESCR in varchar2
+  )
+is
+  MAP_ID number;
+  STMT varchar2(100);
+BEGIN
+
+ select max( MAP_ID ) +1 into MAP_ID from FILE_MAPS;
+ if MAP_ID is null then  
+ MAP_ID:=1;
+end if;
+STMT:='INSERT INTO FILE_MAPS (MAP_ID, SOURCE_ID, DESCR) values('''||MAP_ID||''', '''||SOURCE_ID||''', '''||DESCR||''')';
+DBMS_OUTPUT.PUT_LINE(STMT);
+EXECUTE IMMEDIATE STMT;
+END ADD_MAP;

@@ -17,16 +17,16 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for GetDataTypes complex type.
+ * <p>Java class for DataSource complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="GetDataTypes">
+ * &lt;complexType name="DataSource">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="Types" type="{http://www.fsu.edu/data/datavo/vdo/}DataType" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="Columns" type="{http://www.fsu.edu/data/datavo/vdo/}ColumnMatch" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -36,41 +36,41 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "GetDataTypes", propOrder = {
-    "types"
+@XmlType(name = "DataSource", propOrder = {
+    "columns"
 })
-public class GetDataTypes {
+public class DataSource {
 
-    @XmlElement(name = "Types")
-    protected List<DataType> types;
+    @XmlElement(name = "Columns")
+    protected List<ColumnMatch> columns;
 
     /**
-     * Gets the value of the types property.
+     * Gets the value of the columns property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the types property.
+     * This is why there is not a <CODE>set</CODE> method for the columns property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getTypes().add(newItem);
+     *    getColumns().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link DataType }
+     * {@link ColumnMatch }
      * 
      * 
      */
-    public List<DataType> getTypes() {
-        if (types == null) {
-            types = new ArrayList<DataType>();
+    public List<ColumnMatch> getColumns() {
+        if (columns == null) {
+            columns = new ArrayList<ColumnMatch>();
         }
-        return this.types;
+        return this.columns;
     }
 
 }

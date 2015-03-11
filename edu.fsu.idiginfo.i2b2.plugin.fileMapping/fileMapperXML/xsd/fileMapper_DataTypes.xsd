@@ -145,4 +145,44 @@
 	<xs:element name="get_Record" type="map:Record"></xs:element>
 
 	<xs:element name="get_DataTable" type="map:DataTable"></xs:element>
+
+	<xs:complexType name="Column">
+		<xs:sequence>
+			<xs:element name="SourceFile" type="map:DataFile"></xs:element>
+			<xs:element name="Index" type="xs:int"></xs:element>
+			<xs:element name="Name" type="xs:string"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+    <xs:complexType name="DataFile">
+    	<xs:sequence>
+    		<xs:element name="ID" type="xs:string"></xs:element>
+    	</xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="ColumnMatch">
+    	<xs:sequence>
+    		<xs:element name="Columns" type="map:Column" maxOccurs="unbounded" minOccurs="0"></xs:element>
+    	</xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="FieldColumnMatch">
+    	<xs:sequence>
+    		<xs:element name="DataField" type="map:DataTypeField" maxOccurs="1" minOccurs="1"></xs:element>
+    		<xs:element name="Columns" type="map:ColumnMatch" maxOccurs="1" minOccurs="1"></xs:element>
+    	</xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="DataSource">
+    	<xs:sequence>
+    		<xs:element name="Columns" type="map:ColumnMatch" maxOccurs="unbounded" minOccurs="0"></xs:element>
+    	</xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="ColumnData">
+    	<xs:sequence>
+    		<xs:element name="column" type="map:Column"></xs:element>
+    		<xs:element name="values" type="xs:string" maxOccurs="unbounded" minOccurs="0"></xs:element>
+    	</xs:sequence>
+    </xs:complexType>
 </xs:schema>

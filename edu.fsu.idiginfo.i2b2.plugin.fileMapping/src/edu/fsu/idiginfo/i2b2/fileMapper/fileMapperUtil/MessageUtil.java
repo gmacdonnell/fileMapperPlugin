@@ -19,7 +19,7 @@ import java.util.Locale;
 
 
 
-public class MessageUtil {
+public class MessageUtil  extends FileMapperUtil{
     //to make this class singleton
 	
     private static  final int MAX_STACK_SIZE = 28;
