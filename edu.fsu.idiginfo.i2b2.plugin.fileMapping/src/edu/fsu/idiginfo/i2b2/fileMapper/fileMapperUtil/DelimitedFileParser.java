@@ -12,6 +12,7 @@ import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.Column;
 import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.ColumnData;
 import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.DataFile;
 import edu.fsu.idiginfo.i2b2.fileMapper.fileMapViews.DelimiterView;
+import edu.fsu.idiginfo.i2b2.fileMapper.fileMapViews.TextDelimiterEditorDlg;
 
 public class DelimitedFileParser implements IFileParser {
 
@@ -247,6 +248,7 @@ public class DelimitedFileParser implements IFileParser {
 
 	@Override
 	public void showEditor() {
+		TextDelimiterEditorDlg editor = new TextDelimiterEditorDlg();
 		
 	}
 
