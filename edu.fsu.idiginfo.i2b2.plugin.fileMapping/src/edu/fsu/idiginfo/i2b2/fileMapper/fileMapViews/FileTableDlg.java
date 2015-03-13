@@ -165,8 +165,7 @@ public class FileTableDlg extends JDialog {
 			
 			Parser.loadFile(FilePath);
 			Parser.parseFile();
-			Parser.getFieldCount();
-			clearTable(getTable());
+			clearTable();
 			List<ColumnData> records = Parser.parseFile();
 			fillTable(records);
 			//this.refresh();
@@ -197,14 +196,18 @@ public class FileTableDlg extends JDialog {
 		
 	}
 	
-	public void clearTable(JTable table)
+	public void clearTable()
 	{
-		//TODO
+		model.removeAllColumns();
 	
 	}
 
+	public void setParser(IFileParser parser)
+	{
+		this.Parser = parser;
+	}
 	public IFileParser getParser() {
-		// TODO Auto-generated method stub
+		
 		return Parser;
 	}
 	public JTable getTable()

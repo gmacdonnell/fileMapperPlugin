@@ -1,12 +1,12 @@
 package fileMapViews;
 
 import java.awt.EventQueue;
+import java.util.List;
 
 import javax.swing.JFrame;
 
-import org.springframework.context.ApplicationContext; 
-
-import org.springframework.context.support.ClassPathXmlApplicationContext; 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import Testing.HelloWorldService;
 
@@ -28,13 +28,11 @@ public class TestSpring {
 			public void run() {
 				try {
 
-					ApplicationContext context = new ClassPathXmlApplicationContext( "applicationContext.xml"); 
+					ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext( "applicationContext.xml"); 
 
-					 HelloWorldService obj = (HelloWorldService) context.getBean("helloWorldService"); 
+					List parsers = (List)context.getBeanFactory().getBean("FileParserList");
 
-					   
-					    String message =obj.sayHello(); 
-					    	System.out.println(message); 
+					Object thing = parsers.get(0);
 
 					TestSpring window = new TestSpring();
 					window.frame.setVisible(true);

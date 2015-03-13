@@ -15,16 +15,15 @@ public  class DelimiterView extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	protected JLabel lblNoFileType;
-
+	
 	/**
 	 * Create the panel.
 	 */
 	public DelimiterView() {
 		setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		
-		 lblNoFileType = new JLabel("No File Type Selected");
-		 add(lblNoFileType);
+		
+		 
 		
 
 	}
@@ -37,7 +36,7 @@ public  class DelimiterView extends JPanel {
 
 	public void clear()
 	{
-		remove(lblNoFileType);
+		
 		revalidate();
 		repaint();
 	}

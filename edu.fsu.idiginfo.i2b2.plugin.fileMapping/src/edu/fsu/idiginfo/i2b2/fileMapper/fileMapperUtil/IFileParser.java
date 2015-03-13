@@ -6,6 +6,7 @@ import org.eclipse.jface.viewers.IStructuredContentProvider;
 
 import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.Column;
 import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.ColumnData;
+import edu.fsu.idiginfo.i2b2.fileMapper.fileMapViews.DelimiterView;
 
 public interface IFileParser extends IStructuredContentProvider{
 	
@@ -17,7 +18,10 @@ public interface IFileParser extends IStructuredContentProvider{
 	public List<ColumnData> parseFile();
 	public String[][] getItems();
 	public Column getColumn();
+	@Override
 	public String toString();
+	public void showEditor();
+
 	
 }
 

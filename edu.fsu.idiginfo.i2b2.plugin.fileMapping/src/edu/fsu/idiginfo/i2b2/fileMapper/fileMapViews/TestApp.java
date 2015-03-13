@@ -13,6 +13,8 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.beans.factory.config.ListFactoryBean;
 
 import edu.fsu.idiginfo.i2b2.fileMapper.fileMapperUtil.IFileParser;
+import javax.swing.JDesktopPane;
+import java.awt.BorderLayout;
 public class TestApp {
 
 	private JFrame frame;
@@ -24,17 +26,7 @@ public class TestApp {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ApplicationContext context = new ClassPathXmlApplicationContext( "applicationContext.xml"); 
-
-					 List<IFileParser> list = (List) context.getBean("FileParserList"); 
-
-					   
 					
-					  for(int index = 0; index < list.size() ; index ++)
-					  {
-					   
-						 IFileParser parser = (IFileParser) obj.getObject().get(index);
-					  }
 					TestApp window = new TestApp();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
@@ -56,8 +48,15 @@ public class TestApp {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 721, 544);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		JDesktopPane desktopPane = new JDesktopPane();
+		frame.getContentPane().add(desktopPane, BorderLayout.CENTER);
+		
+		TypeSourceMap typeSourceMap = new TypeSourceMap();
+		typeSourceMap.setBounds(68, 13, 457, 192);
+		desktopPane.add(typeSourceMap);
+		typeSourceMap.setVisible(true);
 	}
-
 }

@@ -70,7 +70,10 @@ public class FileTableModel extends AbstractTableModel {
         }
        
      }
-
+     public void removeAllColumns()
+     {
+    	 columns.clear();
+     }
      public void removeColumn(int selectedColumn) {
          columns.remove(selectedColumn);
          fireTableStructureChanged();

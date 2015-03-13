@@ -18,10 +18,15 @@ import java.awt.Insets;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.io.File;
+import java.util.List;
 
 import javax.swing.JTable;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.DataSource;
+import edu.fsu.idiginfo.i2b2.fileMapper.fileMapperUtil.IFileParser;
 import edu.fsu.idiginfo.i2b2.fileMapper.fileMapperUtil.models.FileTableModel;
 
 public class TypeSourceMap extends JInternalFrame {
@@ -32,6 +37,7 @@ public class TypeSourceMap extends JInternalFrame {
 	private JTable tblFields;
 	private JTable tblDataColumns;
 	private FileTableModel sourceModel;
+	private JComboBox<FileParserPnl> DataTypes;
 
 	/**
 	 * Launch the application.
@@ -73,7 +79,14 @@ public class TypeSourceMap extends JInternalFrame {
 		gbc.gridy = 0;
 		pnlHead.add(lblDataType, gbc);
 		
-		JComboBox<DataTypeView> DataTypes = new JComboBox<DataTypeView>();
+		DataTypes = new JComboBox<FileParserPnl>();
+		initDataTypes();
+		DataTypes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				((FileParserPnl)DataTypes.getSelectedItem()).showEditor();
+			}
+		});
+		
 		GridBagConstraints gbc_1 = new GridBagConstraints();
 		gbc_1.fill = GridBagConstraints.BOTH;
 		gbc_1.insets = new Insets(0, 0, 0, 5);
@@ -91,6 +104,10 @@ public class TypeSourceMap extends JInternalFrame {
 				File file = dlg.getSelectedFile();
 				FileTableDlg fileTable = new FileTableDlg();
 				fileTable.setFilePath(file.getAbsolutePath());
+				IFileParser parser = ((FileParserPnl)DataTypes.getSelectedItem()).getParser();
+				fileTable.setParser(parser);
+				fileTable.load();
+				fileTable.setVisible(true);
 				
 				}
 			}
@@ -142,9 +159,20 @@ public class TypeSourceMap extends JInternalFrame {
 
 	}
 	
-	public void setDataSource(DataSource source)
+	private void initDataTypes()
 	{
-		
-	}
+		ApplicationContext context = new ClassPathXmlApplicationContext( "applicationContext.xml"); 
 
+		 @SuppressWarnings("unchecked")
+		List<String> list = (List<String>) context.getBean("FileParserList"); 
+		 for(String name : list)
+		 {
+			 IFileParser parser = (IFileParser)context.getBean(name);
+			 FileParserPnl pnl = new FileParserPnl();
+			 pnl.setParser(parser);
+			 DataTypes.addItem(pnl);
+			 
+		 }
+		 DataTypes.repaint();
+	}
 }

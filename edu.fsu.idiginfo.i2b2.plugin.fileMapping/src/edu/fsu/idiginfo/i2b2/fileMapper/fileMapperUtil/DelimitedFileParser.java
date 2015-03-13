@@ -11,6 +11,7 @@ import org.eclipse.jface.viewers.Viewer;
 import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.Column;
 import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.ColumnData;
 import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.DataFile;
+import edu.fsu.idiginfo.i2b2.fileMapper.fileMapViews.DelimiterView;
 
 public class DelimitedFileParser implements IFileParser {
 
@@ -20,7 +21,7 @@ public class DelimitedFileParser implements IFileParser {
 	protected int FieldCount;
 	protected int RowCount;
 	private String filePath;
-
+	
 	public DelimitedFileParser(List<Object> delimiters) {
 		setDelimiters(delimiters);
 		init();
@@ -243,5 +244,11 @@ public class DelimitedFileParser implements IFileParser {
 	public String toString() {
 		return TYPE;
 	}
+
+	@Override
+	public void showEditor() {
+		
+	}
+
 
 }
