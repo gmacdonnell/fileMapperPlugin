@@ -14,6 +14,10 @@ import java.awt.GridLayout;
 
 public class CombineColumnDlg extends JDialog {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2837645348407514890L;
 	private final JPanel contentPanel = new JPanel();
 	protected TypeSourceMap caller;
 	protected CombineColumnPnl combiner;

@@ -1,9 +1,8 @@
-package edu.fsu.idiginfo.i2b2.fileMapper.fileMapperUtil.models;
+package edu.fsu.idiginfo.i2b2.fileMapper.fileMapperUtil;
 
 import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.Column;
 import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.ColumnMatch;
 
-import edu.fsu.idiginfo.i2b2.fileMapper.fileMapperUtil.FileMapperUtil;
 
 public class ColumnUtil extends FileMapperUtil{
 	
@@ -12,5 +11,7 @@ public class ColumnUtil extends FileMapperUtil{
 	{
 		return match.getColumns().get(match.getColumns().size()-1);
 	}
+	
+	
 
 }

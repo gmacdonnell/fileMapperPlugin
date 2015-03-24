@@ -1,18 +1,8 @@
 package edu.fsu.idiginfo.i2b2.fileMapper.fileMapViews;
 
 import java.awt.EventQueue;
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.swing.JFrame;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-
-import org.springframework.beans.factory.config.ListFactoryBean;
-
-import edu.fsu.idiginfo.i2b2.fileMapper.fileMapperUtil.IFileParser;
 import javax.swing.JDesktopPane;
 import java.awt.BorderLayout;
 public class TestApp {

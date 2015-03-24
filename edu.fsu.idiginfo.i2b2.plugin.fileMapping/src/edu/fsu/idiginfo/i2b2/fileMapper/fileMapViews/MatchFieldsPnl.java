@@ -13,7 +13,7 @@ import javax.swing.JComboBox;
 import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.Column;
 import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.ColumnMatch;
 import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.DataSource;
-import edu.fsu.idiginfo.i2b2.fileMapper.fileMapperUtil.models.ColumnUtil;
+import edu.fsu.idiginfo.i2b2.fileMapper.fileMapperUtil.ColumnUtil;
 
 import java.awt.Insets;
 import java.util.List;

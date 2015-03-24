@@ -5,33 +5,31 @@ import java.awt.FlowLayout;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
-public class TextDelimiterEditorDlg extends JDialog {
+public class TextDelimiterEditorDlg extends AbsEditorDlg implements ActionListener{
+
+	/**
+	 * Select the characters that delimit the records on the file
+	 */
+	private static final long serialVersionUID = -5224024122386091885L;
+
 
 	private final JPanel contentPanel = new JPanel();
 	protected TextDelimiterView textDelimiterView;
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			TextDelimiterEditorDlg dialog = new TextDelimiterEditorDlg();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+	private int value;
+
 
 	/**
 	 * Create the dialog.
 	 */
 	public TextDelimiterEditorDlg() {
-		this.setTitle("Select Text Delimiters");
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -47,6 +45,13 @@ public class TextDelimiterEditorDlg extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("OK");
+				okButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						value = AbsEditorDlg.OK;
+						setVisible(false); 
+						dispose();
+					}
+				});
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
@@ -57,9 +62,25 @@ public class TextDelimiterEditorDlg extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
+		value = AbsEditorDlg.CANCEL;
+		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 	}
 	public List getDelimiters()
 	{
 		return textDelimiterView.getDelimiters();
+		
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		setVisible(false); 
+	    dispose(); 
+	}
+
+	public int showDialog()
+	{
+		this.setModal(true);
+		setVisible(true);
+		
+		return value;
 	}
 }

@@ -8,6 +8,7 @@ import org.eclipse.jface.viewers.Viewer;
 
 import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.Column;
 import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.ColumnData;
+import edu.fsu.idiginfo.i2b2.fileMapper.fileMapViews.AbsEditorDlg;
 
 public class BlankFileParser implements IFileParser {
 	public static String TYPE= "Choose a file type";
@@ -74,5 +75,11 @@ public class BlankFileParser implements IFileParser {
 	public String toString()
 	{
 		return TYPE;
+	}
+
+	@Override
+	public int showEditor() {
+		// TODO Auto-generated method stub
+		return AbsEditorDlg.CANCEL;
 	}
 }

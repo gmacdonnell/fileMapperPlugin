@@ -15,6 +15,7 @@ public class FileParserPnl extends JPanel {
 
 	protected IFileParser parser;
 	private JTextField textField;
+	private int value; // holds return from editor
 	
 	
 	/**
@@ -26,6 +27,7 @@ public class FileParserPnl extends JPanel {
 		textField = new JTextField();
 		add(textField);
 		textField.setColumns(10);
+		value = 0;
 
 	}
 	public IFileParser getParser() {
@@ -44,8 +46,15 @@ public class FileParserPnl extends JPanel {
 		return null;
 	}
 	
-	public void showEditor()
+	public int  showEditor()
 	{
-		
+		if(parser !=null){
+		value = parser.showEditor();
+		}
+		return value;
+	}
+	public int getValue()
+	{
+		return value;
 	}
 }

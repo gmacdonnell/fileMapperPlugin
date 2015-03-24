@@ -18,6 +18,7 @@ import java.awt.Insets;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JTable;
@@ -25,41 +26,34 @@ import javax.swing.JTable;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.ColumnData;
+import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.DataFile;
 import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.DataSource;
 import edu.fsu.idiginfo.i2b2.fileMapper.fileMapperUtil.IFileParser;
+import edu.fsu.idiginfo.i2b2.fileMapper.fileMapperUtil.models.ColumnTableModel;
 import edu.fsu.idiginfo.i2b2.fileMapper.fileMapperUtil.models.FileTableModel;
 
 public class TypeSourceMap extends JInternalFrame {
 	/**
+	 * map file from a data source to datatypes from i2b2
 	 * 
 	 */
 	private static final long serialVersionUID = -3755640751213165068L;
 	private JTable tblFields;
 	private JTable tblDataColumns;
-	private FileTableModel sourceModel;
+	private ColumnTableModel sourceModel;
 	private JComboBox<FileParserPnl> DataTypes;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TypeSourceMap frame = new TypeSourceMap();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				
-				}
-			}
-		});
-	}
+	private JButton btnAddFile;
+	private JButton btnShowFiles;
+	private ArrayList<DataFile> files;
+	
 
 	/**
 	 * Create the frame.
 	 */
 	public TypeSourceMap() {
+		setResizable(true);
+		setMaximizable(true);
 		setBounds(100, 100, 507, 386);
 		
 		JPanel pnlHead = new JPanel();
@@ -83,7 +77,13 @@ public class TypeSourceMap extends JInternalFrame {
 		initDataTypes();
 		DataTypes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				((FileParserPnl)DataTypes.getSelectedItem()).showEditor();
+				FileParserPnl pnl = ((FileParserPnl)DataTypes.getSelectedItem());
+				int result = pnl.showEditor();
+				
+				if(result == AbsEditorDlg.OK )
+				{
+					btnAddFile.setEnabled(true);
+				}
 			}
 		});
 		
@@ -94,24 +94,30 @@ public class TypeSourceMap extends JInternalFrame {
 		gbc_1.gridy = 0;
 		pnlHead.add(DataTypes, gbc_1);
 		
-		JButton btnAddFile = new JButton("Add File");
+		btnAddFile = new JButton("Add File");
 		btnAddFile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JFileChooser dlg = new JFileChooser();
-				if(dlg.showOpenDialog(getParent()) == JOptionPane.OK_OPTION)
-				{
 				
-				File file = dlg.getSelectedFile();
 				FileTableDlg fileTable = new FileTableDlg();
-				fileTable.setFilePath(file.getAbsolutePath());
-				IFileParser parser = ((FileParserPnl)DataTypes.getSelectedItem()).getParser();
-				fileTable.setParser(parser);
-				fileTable.load();
-				fileTable.setVisible(true);
-				
+				int result = fileTable.showDialog();
+				if(result == AbsEditorDlg.OK)
+				{
+					
+					btnShowFiles.setEnabled(true);
+					//TODO add code to handle the file 
+					DataSource source = fileTable.getDataSource() ;
+					if(files.size()>0)
+					{
+						
+					}
+					sourceModel.setDataSource(source);
+					files.add(fileTable.getDataFile());
 				}
+				
+		
 			}
 		});
+		btnAddFile.setEnabled(true);
 		GridBagConstraints gbc_2 = new GridBagConstraints();
 		gbc_2.insets = new Insets(0, 0, 0, 5);
 		gbc_2.fill = GridBagConstraints.BOTH;
@@ -119,11 +125,12 @@ public class TypeSourceMap extends JInternalFrame {
 		gbc_2.gridy = 0;
 		pnlHead.add(btnAddFile, gbc_2);
 		
-		JButton btnShowFiles = new JButton("Show Files");
+		btnShowFiles = new JButton("Show Files");
 		btnShowFiles.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
+		btnShowFiles.setEnabled(false);
 		GridBagConstraints gbc_btnShowFiles = new GridBagConstraints();
 		gbc_btnShowFiles.gridx = 3;
 		gbc_btnShowFiles.gridy = 0;
@@ -151,28 +158,18 @@ public class TypeSourceMap extends JInternalFrame {
 		pnlBody.add(tblFields, gbc_tblFields);
 		
 		tblDataColumns = new JTable();
+		sourceModel = new ColumnTableModel();
+		tblDataColumns.setModel(sourceModel);
 		GridBagConstraints gbc_tblDataColumns = new GridBagConstraints();
 		gbc_tblDataColumns.fill = GridBagConstraints.BOTH;
 		gbc_tblDataColumns.gridx = 0;
 		gbc_tblDataColumns.gridy = 1;
 		pnlBody.add(tblDataColumns, gbc_tblDataColumns);
-
+		files=new ArrayList<DataFile>();
 	}
-	
 	private void initDataTypes()
 	{
-		ApplicationContext context = new ClassPathXmlApplicationContext( "applicationContext.xml"); 
-
-		 @SuppressWarnings("unchecked")
-		List<String> list = (List<String>) context.getBean("FileParserList"); 
-		 for(String name : list)
-		 {
-			 IFileParser parser = (IFileParser)context.getBean(name);
-			 FileParserPnl pnl = new FileParserPnl();
-			 pnl.setParser(parser);
-			 DataTypes.addItem(pnl);
-			 
-		 }
-		 DataTypes.repaint();
+		//TODO create code to message db for data types
 	}
+	
 }

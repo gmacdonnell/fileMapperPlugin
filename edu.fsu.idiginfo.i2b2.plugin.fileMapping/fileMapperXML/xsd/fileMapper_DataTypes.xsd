@@ -157,6 +157,8 @@
     <xs:complexType name="DataFile">
     	<xs:sequence>
     		<xs:element name="ID" type="xs:string"></xs:element>
+    		<xs:element name="Type" type="xs:string"></xs:element>
+    		<xs:element name="Notes" type="xs:int" maxOccurs="unbounded" minOccurs="0"></xs:element>
     	</xs:sequence>
     </xs:complexType>
 

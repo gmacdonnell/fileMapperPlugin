@@ -1,7 +1,5 @@
 package edu.fsu.idiginfo.i2b2.fileMapper.fileMapViews;
 
-import java.util.ArrayList;
-
 import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 

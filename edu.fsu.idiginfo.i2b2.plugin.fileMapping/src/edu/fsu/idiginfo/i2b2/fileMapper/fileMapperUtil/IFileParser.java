@@ -1,6 +1,7 @@
 package edu.fsu.idiginfo.i2b2.fileMapper.fileMapperUtil;
 
 import java.util.List;
+import javax.swing.JFrame;
 
 import org.eclipse.jface.viewers.IStructuredContentProvider;
 
@@ -20,7 +21,8 @@ public interface IFileParser extends IStructuredContentProvider{
 	public Column getColumn();
 	@Override
 	public String toString();
-	public void showEditor();
+	public int showEditor();
+
 
 	
 }

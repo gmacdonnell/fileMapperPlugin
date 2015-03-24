@@ -1,16 +1,21 @@
 package edu.fsu.idiginfo.i2b2.fileMapper.fileMapperUtil;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
+import javax.swing.JFrame;
+
 import org.eclipse.jface.viewers.Viewer;
 
 import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.Column;
 import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.ColumnData;
 import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.DataFile;
+import edu.fsu.idiginfo.i2b2.fileMapper.fileMapViews.AbsEditorDlg;
 import edu.fsu.idiginfo.i2b2.fileMapper.fileMapViews.DelimiterView;
 import edu.fsu.idiginfo.i2b2.fileMapper.fileMapViews.TextDelimiterEditorDlg;
 
@@ -22,7 +27,7 @@ public class DelimitedFileParser implements IFileParser {
 	protected int FieldCount;
 	protected int RowCount;
 	private String filePath;
-	
+
 	public DelimitedFileParser(List<Object> delimiters) {
 		setDelimiters(delimiters);
 		init();
@@ -149,7 +154,7 @@ public class DelimitedFileParser implements IFileParser {
 
 	public List<ColumnData> parseFile() {
 
-		String[][] records = new String[FieldCount][];
+		String[][] records = new String[Lines.size()][];
 		for (int index = 0; index < Lines.size(); index++) {
 			records[index] = (ParseLine(Lines.get(index)));
 		}
@@ -158,12 +163,14 @@ public class DelimitedFileParser implements IFileParser {
 
 	public List<ColumnData> makeColumns(String[][] records) {
 		ArrayList<ColumnData> columns = new ArrayList<ColumnData>();
-		for (int col = 0; col < records.length; col++) {
+		for (int col = 0; col < records[0].length; col++) {
 			ColumnData cd = new ColumnData();
-			cd.setColumn(getColumn());
+			Column column = getColumn();
+			column.setName(records[0][col]);
+			cd.setColumn(column);
 
-			for (int row = 0; row < records[col].length; row++) {
-				cd.getValues().add(records[col][row]);
+			for (int row = 0; row < records.length; row++) {
+				cd.getValues().add(records[row][col]);
 
 			}
 			columns.add(cd);
@@ -237,6 +244,15 @@ public class DelimitedFileParser implements IFileParser {
 		Column col = new Column();
 		DataFile file = new DataFile();
 		file.setID(filePath);
+		file.setType(TYPE);
+		file.getNotes().add(0, -1);
+		int count = 1;
+		for(String delim : Delimiters)
+		{
+			char letter = delim.charAt(0);
+			file.getNotes().add(count, (int)letter);
+			count++;
+		}
 		col.setSourceFile(file);
 
 		return col;
@@ -247,10 +263,17 @@ public class DelimitedFileParser implements IFileParser {
 	}
 
 	@Override
-	public void showEditor() {
+	public int showEditor() {
 		TextDelimiterEditorDlg editor = new TextDelimiterEditorDlg();
+		int result = editor.showDialog();
+		if(result == AbsEditorDlg.OK)
+		{
+		setDelimiters(editor.getDelimiters());
+		}
+		return result;
 		
 	}
+
 
 
 }
