@@ -25,7 +25,7 @@ public class FileTableModel extends AbstractTableModel {
 	private List<ColumnData> columns = new ArrayList<ColumnData>();
 	private boolean editTitle;
 	private boolean hasTitles;
-
+	private boolean supress;
 	public static int ROWS = 5;
 
 	@Override
@@ -48,6 +48,7 @@ public class FileTableModel extends AbstractTableModel {
 				columns.get(column).getValues().set(0,value);
 				
 		 }
+		 
 		 fireTableStructureChanged();
 		
 	}
@@ -138,7 +139,7 @@ public class FileTableModel extends AbstractTableModel {
 			{
 				column.getSourceFile().getNotes().set(TITLESINDEX,TITLES);
 			}
-			match.getColumns().add(column);
+			match.getColumns().add(cd);
 			outVal.getColumns().add(match);
 		}
 		
@@ -150,6 +151,14 @@ public class FileTableModel extends AbstractTableModel {
 
 	public void setHasTitles(boolean hasTitles) {
 		this.hasTitles = hasTitles;
+	}
+
+	public boolean isSupress() {
+		return supress;
+	}
+
+	public void setSupress(boolean supress) {
+		this.supress = supress;
 	}
 
 }

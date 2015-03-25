@@ -5,6 +5,8 @@ import javax.swing.JPanel;
 import java.awt.Component;
 import java.awt.GridLayout;
 import javax.swing.JScrollPane;
+
+import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.ColumnMatch;
 import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.DataSource;
 import javax.swing.JMenuBar;
 import java.awt.GridBagLayout;
@@ -19,16 +21,17 @@ import java.awt.event.ActionEvent;
 public class CombineColumnPnl extends JPanel {
 
 	/**
-	 * 
+	 * Match columns in the fromFile with columns in the existing data source. 
 	 */
 	private static final long serialVersionUID = 6283941296740086099L;
 	private JPanel pnlMatches;
+	private DataSource existing;
 	
 	/**
 	 * Create the panel.
 	 */
 	public CombineColumnPnl(DataSource fromFile, DataSource existing) {
-		
+		this.existing = existing;
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{539, 0};
 		gridBagLayout.rowHeights = new int[]{25, 439, 0};
@@ -90,15 +93,22 @@ public class CombineColumnPnl extends JPanel {
 	
 	public DataSource getDataSource()
 	{
-		DataSource source = new DataSource();
+		//DataSource source = new DataSource();
 		for(Component comp : pnlMatches.getComponents())
 		{
 			if(comp instanceof MatchFieldsPnl)
 			{
-				source.getColumns().add(((MatchFieldsPnl)comp).getMatch());
+				if(((MatchFieldsPnl) comp).include())
+				{
+					ColumnMatch match = ((MatchFieldsPnl)comp).getMatch();
+					if(!existing.getColumns().contains(match))
+					{
+						existing.getColumns().add(match);
+					}
+				}
 			}
 		}
-		return source;
+		return existing;
 	}
 	
 	

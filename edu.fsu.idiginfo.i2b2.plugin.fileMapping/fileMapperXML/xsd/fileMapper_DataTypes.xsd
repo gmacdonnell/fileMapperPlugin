@@ -164,7 +164,9 @@
 
     <xs:complexType name="ColumnMatch">
     	<xs:sequence>
-    		<xs:element name="Columns" type="map:Column" maxOccurs="unbounded" minOccurs="0"></xs:element>
+    		<xs:element name="Columns" type="map:ColumnData"
+    			maxOccurs="unbounded" minOccurs="0">
+    		</xs:element>
     	</xs:sequence>
     </xs:complexType>
 

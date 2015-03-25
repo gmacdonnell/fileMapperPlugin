@@ -6,6 +6,7 @@ import javax.swing.JTextField;
 import javax.swing.JComboBox;
 
 import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.Column;
+import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.ColumnData;
 
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
@@ -17,13 +18,13 @@ public class ColumnView extends JPanel {
 	 */
 	private static final long serialVersionUID = 5747552307035951539L;
 	private JTextField txtName;
-	protected Column column;
+	protected ColumnData columnData;
 	private JTextField txtIndex;
 
 	/**
 	 * Create the panel.
 	 */
-	public ColumnView(Column col) {
+	public ColumnView(ColumnData col) {
 		
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{133, 60, 0};
@@ -54,33 +55,33 @@ public class ColumnView extends JPanel {
 
 	public int getIndex()
 	{
-		return column.getIndex();
+		return columnData.getColumn().getIndex();
 	}
 	public void setIndex(int value)
 	{
 		txtIndex.setText(new Integer(value).toString());
-		column.setIndex(value);
+		columnData.getColumn().setIndex(value);
 	}
 	
 	
 	public String getName()
 	{
-		return column.getName();
+		return columnData.getColumn().getName();
 	}
 
 	public void setName(String Name) {
 		this.txtName.setText(Name);
-		column.setName(Name);
+		columnData.getColumn().setName(Name);
 	}
 
-	public Column getColumn() {
-		return column;
+	public ColumnData getColumn() {
+		return columnData;
 	}
 
-	public void setColumn(Column column) {
-		this.column = column;
-		setIndex(column.getIndex());
-		setName(column.getName());
+	public void setColumn(ColumnData columndata) {
+		this.columnData = columndata;
+		setIndex(columnData.getColumn().getIndex());
+		setName(columnData.getColumn().getName());
 	}
 	
 	public String toString()

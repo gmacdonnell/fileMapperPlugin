@@ -46,8 +46,8 @@ import org.apache.xerces.dom.ElementNSImpl;
 //import com.sun.org.apache.xerces.internal.dom.ElementNSImpl;
 import edu.harvard.i2b2.eclipse.UserInfoBean;
 
-import edu.fsu.idiginfo.i2b2.fileMapper.fileMapperUtil.MessageUtil;
 import edu.fsu.idiginfo.i2b2.fileMapper.fileMapperUtil.FileMapperJAXBUtil;
+import edu.fsu.idiginfo.i2b2.fileMapper.fileMapperUtil.messaging.MessageUtil;
 import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.i2b2message.BodyType;
 import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.i2b2message.MessageHeaderType;
 import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.i2b2message.RequestMessageType;

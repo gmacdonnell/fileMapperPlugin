@@ -22,8 +22,8 @@ import edu.harvard.i2b2.common.util.jaxb.DTOFactory;
 import edu.harvard.i2b2.common.util.jaxb.JAXBUtilException;
 
 import edu.harvard.i2b2.eclipse.UserInfoBean;
-import edu.fsu.idiginfo.i2b2.fileMapper.fileMapperUtil.Messages;
 import edu.fsu.idiginfo.i2b2.fileMapper.fileMapperUtil.FileMapperJAXBUtil;
+import edu.fsu.idiginfo.i2b2.fileMapper.fileMapperUtil.messaging.Messages;
 import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.i2b2message.ApplicationType;
 import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.i2b2message.BodyType;
 import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.i2b2message.FacilityType;

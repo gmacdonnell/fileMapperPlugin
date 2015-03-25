@@ -36,7 +36,6 @@ import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.i2b2message.SecurityType;
 import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.GetDataTypes;
 
 import edu.fsu.idiginfo.i2b2.fileMapper.fileMapperUtil.FileMapperJAXBUtil;
-import edu.fsu.idiginfo.i2b2.fileMapper.fileMapperUtil.Messages;
 import edu.fsu.idiginfo.i2b2.fileMapper.serviceClient.FileMapperRequestClient;
 import edu.fsu.idiginfo.i2b2.fileMapper.ws.FileMapperServiceDriver;
 import edu.harvard.i2b2.eclipse.UserInfoBean;

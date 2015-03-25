@@ -7,7 +7,7 @@
  * Contributors:
  * 		Lori Phillips
  */
-package edu.fsu.idiginfo.i2b2.fileMapper.fileMapperUtil;
+package edu.fsu.idiginfo.i2b2.fileMapper.fileMapperUtil.messaging;
 
 
 public class StackData {

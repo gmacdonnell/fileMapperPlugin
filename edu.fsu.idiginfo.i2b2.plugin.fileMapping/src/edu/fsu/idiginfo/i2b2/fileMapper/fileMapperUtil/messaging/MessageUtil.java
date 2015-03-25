@@ -8,12 +8,14 @@
  * 		Lori Phillips
  */
 
-package edu.fsu.idiginfo.i2b2.fileMapper.fileMapperUtil;
+package edu.fsu.idiginfo.i2b2.fileMapper.fileMapperUtil.messaging;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+
+import edu.fsu.idiginfo.i2b2.fileMapper.fileMapperUtil.FileMapperUtil;
 
 
 

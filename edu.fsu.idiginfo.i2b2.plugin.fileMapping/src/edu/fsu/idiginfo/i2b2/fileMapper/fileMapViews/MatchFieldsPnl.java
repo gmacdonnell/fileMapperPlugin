@@ -11,6 +11,7 @@ import javax.swing.JComboBox;
 
 
 import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.Column;
+import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.ColumnData;
 import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.ColumnMatch;
 import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.DataSource;
 import edu.fsu.idiginfo.i2b2.fileMapper.fileMapperUtil.ColumnUtil;
@@ -112,7 +113,7 @@ public class MatchFieldsPnl extends JPanel {
 		List<ColumnMatch> columns = source.getColumns();
 		for(ColumnMatch colMatch : columns)
 		{
-			Column col = ColumnUtil.getLast(colMatch);
+			ColumnData col = ColumnUtil.getLastData(colMatch);
 			box.addItem(new ColumnView(col));
 		}
 		box.repaint();
@@ -124,18 +125,20 @@ public class MatchFieldsPnl extends JPanel {
 	
 	public ColumnMatch getMatch()
 	{
-		ColumnMatch match;
-		
-		if(cbMatch.isSelected())
+		ColumnMatch match = null;
+		if(cbInclude.isSelected())
 		{
-			match = ((ColumnMatchView)ExistingField.getSelectedItem()).getColumnMatch();
-			
-		}else
-		{
-			match = new ColumnMatch();
-			
+			if(cbMatch.isSelected())
+			{
+				match = ((ColumnMatchView)ExistingField.getSelectedItem()).getColumnMatch();
+				
+			}else
+			{
+				match = new ColumnMatch();
+				
+			}
+			match.getColumns().add(((ColumnView)FileField.getSelectedItem()).getColumn());
 		}
-		match.getColumns().add(((ColumnView)FileField.getSelectedItem()).getColumn());
 		return match;
 	}
 	
@@ -157,5 +160,9 @@ public class MatchFieldsPnl extends JPanel {
 	public int getIndex()
 	{
 		return index;
+	}
+	public boolean include()
+	{
+		return cbInclude.isSelected();
 	}
 }

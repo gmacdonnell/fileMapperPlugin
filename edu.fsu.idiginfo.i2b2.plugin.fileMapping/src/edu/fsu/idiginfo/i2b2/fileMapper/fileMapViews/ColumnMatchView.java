@@ -6,6 +6,7 @@ import javax.swing.JTextField;
 import javax.swing.JComboBox;
 
 import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.Column;
+import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.ColumnData;
 import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.ColumnMatch;
 import edu.fsu.idiginfo.i2b2.fileMapper.fileMapperUtil.ColumnUtil;
 
@@ -59,7 +60,7 @@ public class ColumnMatchView extends JPanel {
 	
 	public String getName()
 	{
-		return ColumnUtil.getLast(columnMatch).getName();
+		return ColumnUtil.getLastColumn(columnMatch).getName();
 	}
 
 	
@@ -70,7 +71,7 @@ public class ColumnMatchView extends JPanel {
 
 	public void setColumnMatch(ColumnMatch columnMatch) {
 		this.columnMatch = columnMatch;
-		Column column = ColumnUtil.getLast(columnMatch);
+		Column column = ColumnUtil.getLastColumn(columnMatch);
 		setName(column.getName());
 	}
 	
@@ -82,8 +83,9 @@ public class ColumnMatchView extends JPanel {
 	public boolean isMatch(String name)
 	{
 		boolean match = false;
-		for(Column col : columnMatch.getColumns())
+		for(ColumnData colData : columnMatch.getColumns())
 		{
+			Column col = colData.getColumn();
 			if(col.getName().equals(name))
 			{
 				return true;

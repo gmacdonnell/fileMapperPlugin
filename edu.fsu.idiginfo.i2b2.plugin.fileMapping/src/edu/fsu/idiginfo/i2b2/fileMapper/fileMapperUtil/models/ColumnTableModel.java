@@ -24,7 +24,7 @@ public class ColumnTableModel extends AbstractTableModel {
 	private List<ColumnMatch> columns = new ArrayList<ColumnMatch>();
 
 
-	public static int ROWS = 5;
+	//public static int ROWS = 5;
 
 	@Override
 	public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -35,7 +35,7 @@ public class ColumnTableModel extends AbstractTableModel {
 	@Override
 	public String getColumnName(int index) {
 		ColumnMatch match = columns.get(index);
-		Column column = ColumnUtil.getLast(match);
+		Column column = ColumnUtil.getLastColumn(match);
 		return column.getName();
 	}
 	
@@ -57,8 +57,7 @@ public class ColumnTableModel extends AbstractTableModel {
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		try {
-			
-			return columns.get(columnIndex).getColumns().get(rowIndex);
+				return columns.get(columnIndex).getColumns().get(rowIndex).getValues().get(0);
 		} catch (Exception e) {
 			return null;
 		}
@@ -69,7 +68,7 @@ public class ColumnTableModel extends AbstractTableModel {
 	public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
 		if(aValue instanceof Column)
 		{
-			columns.get(columnIndex).getColumns().set(rowIndex, (Column)aValue);
+			columns.get(columnIndex).getColumns().set(rowIndex, (ColumnData)aValue);
 		}
 		
 	}

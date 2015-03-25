@@ -7,8 +7,12 @@ import java.awt.ScrollPane;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import org.eclipse.jface.layout.TableColumnLayout;
 import org.eclipse.jface.viewers.TableViewer;
@@ -94,7 +98,9 @@ public class FileTableDlg extends JDialog {
 		}
 		
 		fileView = new JTable(model = new FileTableModel());
+		fileView.setColumnSelectionAllowed(true);
 		model.enableTitleEdit(true);
+		model.setSupress(false);
 	/*	GridBagConstraints gbc_fileView = new GridBagConstraints();
 		gbc_fileView.insets = new Insets(0, 0, 5, 0);
 		gbc_fileView.fill = GridBagConstraints.BOTH;
@@ -180,6 +186,28 @@ public class FileTableDlg extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
+		ListSelectionModel lsmodel = fileView.getSelectionModel();
+		lsmodel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		lsmodel.addListSelectionListener(new ListSelectionListener(){
+			 boolean supress = false;
+			public void valueChanged(ListSelectionEvent e){
+				
+				int index = fileView.getSelectedColumn();
+				if(!supress && index >= 0)
+				{
+					supress = true;
+				String name = JOptionPane.showInputDialog("Enter new name for column");
+				if(name != null)
+				{
+					
+					model.setColumnName(index, name);
+				}
+				}
+				supress=false;
+				
+			}
+		
+		});
 		value = AbsEditorDlg.CANCEL;
 	}
 
@@ -296,4 +324,6 @@ public class FileTableDlg extends JDialog {
 		}
 		return dataFile;
 	}
+	
+	
 }

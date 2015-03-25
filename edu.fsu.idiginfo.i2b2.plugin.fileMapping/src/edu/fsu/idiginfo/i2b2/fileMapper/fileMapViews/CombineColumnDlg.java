@@ -11,11 +11,14 @@ import javax.swing.border.EmptyBorder;
 import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.DataSource;
 
 import java.awt.GridLayout;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class CombineColumnDlg extends JDialog {
 
+	private int result;
 	/**
-	 * 
+	 * allows a user to match existing columns to ones from a new data source
 	 */
 	private static final long serialVersionUID = -2837645348407514890L;
 	private final JPanel contentPanel = new JPanel();
@@ -23,7 +26,7 @@ public class CombineColumnDlg extends JDialog {
 	protected CombineColumnPnl combiner;
 	/**
 	 * Launch the application.
-	 */
+	
 	public static void main(String[] args) {
 		try {
 			CombineColumnDlg dialog = new CombineColumnDlg();
@@ -33,12 +36,12 @@ public class CombineColumnDlg extends JDialog {
 			e.printStackTrace();
 		}
 	}
-
+ */
 	/**
 	 * Create the dialog.
 	 */
 	
-	public CombineColumnDlg() {
+	public CombineColumnDlg(DataSource fromFile, DataSource existing) {
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -50,6 +53,13 @@ public class CombineColumnDlg extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("OK");
+				okButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						setVisible(false);
+						dispose();
+						result = AbsEditorDlg.OK;
+					}
+				});
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
@@ -57,9 +67,18 @@ public class CombineColumnDlg extends JDialog {
 			{
 				JButton cancelButton = new JButton("Cancel");
 				cancelButton.setActionCommand("Cancel");
+				cancelButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						setVisible(false);
+						dispose();
+						result = AbsEditorDlg.CANCEL;
+					}
+				});
 				buttonPane.add(cancelButton);
 			}
 		}
+		setData( fromFile,  existing);
+		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 	}
 
 	public void setData(DataSource fromFile, DataSource existing)
@@ -70,5 +89,15 @@ public class CombineColumnDlg extends JDialog {
 	public void setCallingView(TypeSourceMap caller)
 	{
 		this.caller = caller;
+	}
+	public int showDialog()
+	{
+		this.setModal(true);
+		this.setVisible(true);
+		return result;
+	}
+	public DataSource getDataSource()
+	{
+		 return combiner.getDataSource();
 	}
 }

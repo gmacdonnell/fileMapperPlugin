@@ -32,6 +32,7 @@ import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.DataSource;
 import edu.fsu.idiginfo.i2b2.fileMapper.fileMapperUtil.IFileParser;
 import edu.fsu.idiginfo.i2b2.fileMapper.fileMapperUtil.models.ColumnTableModel;
 import edu.fsu.idiginfo.i2b2.fileMapper.fileMapperUtil.models.FileTableModel;
+import javax.swing.JScrollPane;
 
 public class TypeSourceMap extends JInternalFrame {
 	/**
@@ -46,6 +47,8 @@ public class TypeSourceMap extends JInternalFrame {
 	private JButton btnAddFile;
 	private JButton btnShowFiles;
 	private ArrayList<DataFile> files;
+	private JScrollPane scrollPaneFields;
+	private JScrollPane scrollPaneData;
 	
 
 	/**
@@ -54,7 +57,7 @@ public class TypeSourceMap extends JInternalFrame {
 	public TypeSourceMap() {
 		setResizable(true);
 		setMaximizable(true);
-		setBounds(100, 100, 507, 386);
+		setBounds(100, 100, 507, 480);
 		
 		JPanel pnlHead = new JPanel();
 		getContentPane().add(pnlHead, BorderLayout.NORTH);
@@ -106,12 +109,12 @@ public class TypeSourceMap extends JInternalFrame {
 					btnShowFiles.setEnabled(true);
 					//TODO add code to handle the file 
 					DataSource source = fileTable.getDataSource() ;
-					if(files.size()>0)
+					if(doMatching(source))
 					{
-						
+						btnShowFiles.setEnabled(true);
+						sourceModel.setDataSource(source);
+						files.add(fileTable.getDataFile());
 					}
-					sourceModel.setDataSource(source);
-					files.add(fileTable.getDataFile());
 				}
 				
 		
@@ -140,7 +143,7 @@ public class TypeSourceMap extends JInternalFrame {
 		getContentPane().add(pnlBody, BorderLayout.CENTER);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0};
-		gridBagLayout.rowHeights = new int[]{40, 0, 0};
+		gridBagLayout.rowHeights = new int[]{50, 50, 0};
 		gridBagLayout.columnWeights = new double[]{1.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{1.0, 1.0, Double.MIN_VALUE};
 		pnlBody.setLayout(gridBagLayout);
@@ -150,26 +153,47 @@ public class TypeSourceMap extends JInternalFrame {
 		tblFields.setCellSelectionEnabled(true);
 		tblFields.setColumnSelectionAllowed(true);
 	
-		GridBagConstraints gbc_tblFields = new GridBagConstraints();
-		gbc_tblFields.insets = new Insets(0, 0, 5, 0);
-		gbc_tblFields.fill = GridBagConstraints.BOTH;
-		gbc_tblFields.gridx = 0;
-		gbc_tblFields.gridy = 0;
-		pnlBody.add(tblFields, gbc_tblFields);
 		
-		tblDataColumns = new JTable();
-		sourceModel = new ColumnTableModel();
-		tblDataColumns.setModel(sourceModel);
-		GridBagConstraints gbc_tblDataColumns = new GridBagConstraints();
-		gbc_tblDataColumns.fill = GridBagConstraints.BOTH;
-		gbc_tblDataColumns.gridx = 0;
-		gbc_tblDataColumns.gridy = 1;
-		pnlBody.add(tblDataColumns, gbc_tblDataColumns);
+		
+		tblDataColumns = new JTable(sourceModel = new ColumnTableModel());
+		tblDataColumns.setFillsViewportHeight(true);
+		
+		
+		scrollPaneFields = new JScrollPane();
+		GridBagConstraints gbc_scrollPaneFields = new GridBagConstraints();
+		gbc_scrollPaneFields.insets = new Insets(0, 0, 5, 0);
+		gbc_scrollPaneFields.fill = GridBagConstraints.BOTH;
+		gbc_scrollPaneFields.gridx = 0;
+		gbc_scrollPaneFields.gridy = 0;
+		pnlBody.add(scrollPaneFields, gbc_scrollPaneFields);
+		scrollPaneFields.setViewportView(tblFields);
+		scrollPaneData = new JScrollPane();
+		GridBagConstraints gbc_scrollPaneData = new GridBagConstraints();
+		gbc_scrollPaneData.fill = GridBagConstraints.BOTH;
+		gbc_scrollPaneData.gridx = 0;
+		gbc_scrollPaneData.gridy = 1;
+		pnlBody.add(scrollPaneData, gbc_scrollPaneData);
+		scrollPaneData.setViewportView(tblDataColumns);
 		files=new ArrayList<DataFile>();
 	}
 	private void initDataTypes()
 	{
 		//TODO create code to message db for data types
+	}
+	private boolean doMatching(DataSource source)
+	{
+		if(files.size()>0)
+		{
+			DataSource current = sourceModel.getDataSource();
+			CombineColumnDlg ccd = new CombineColumnDlg(source,current);
+			if(ccd.showDialog()==AbsEditorDlg.OK)
+			{
+				sourceModel.setDataSource(ccd.getDataSource());
+			}
+			return false;
+		}
+		
+		return true;
 	}
 	
 }

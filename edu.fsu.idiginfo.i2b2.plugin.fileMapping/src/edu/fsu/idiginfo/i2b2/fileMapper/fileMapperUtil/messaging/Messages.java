@@ -8,7 +8,7 @@
  * 		Raj Kuttan
  * 		Lori Phillips
  */
-package edu.fsu.idiginfo.i2b2.fileMapper.fileMapperUtil;
+package edu.fsu.idiginfo.i2b2.fileMapper.fileMapperUtil.messaging;
 
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;

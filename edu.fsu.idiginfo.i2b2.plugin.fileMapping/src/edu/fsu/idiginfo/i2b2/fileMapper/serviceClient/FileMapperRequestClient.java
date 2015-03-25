@@ -33,7 +33,7 @@ import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.i2b2message.ResponseMessageT
 import edu.harvard.i2b2.eclipse.UserInfoBean;
 //import edu.harvard.i2b2.eclipse.plugins.query.utils.MessageUtil;
 import edu.fsu.idiginfo.i2b2.fileMapper.fileMapperUtil.FileMapperJAXBUtil;
-import edu.fsu.idiginfo.i2b2.fileMapper.fileMapperUtil.MessageUtil;
+import edu.fsu.idiginfo.i2b2.fileMapper.fileMapperUtil.messaging.MessageUtil;
 
 public class FileMapperRequestClient {
 
