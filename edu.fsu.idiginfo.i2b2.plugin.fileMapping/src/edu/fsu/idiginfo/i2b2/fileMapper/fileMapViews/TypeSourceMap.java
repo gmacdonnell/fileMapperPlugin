@@ -29,9 +29,11 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.ColumnData;
 import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.DataFile;
 import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.DataSource;
+import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.GetDataTypes;
 import edu.fsu.idiginfo.i2b2.fileMapper.fileMapperUtil.IFileParser;
 import edu.fsu.idiginfo.i2b2.fileMapper.fileMapperUtil.models.ColumnTableModel;
 import edu.fsu.idiginfo.i2b2.fileMapper.fileMapperUtil.models.FileTableModel;
+import edu.fsu.idiginfo.i2b2.fileMapper.ws.FileMapperServiceDriver;
 import javax.swing.JScrollPane;
 
 public class TypeSourceMap extends JInternalFrame {
@@ -77,7 +79,7 @@ public class TypeSourceMap extends JInternalFrame {
 		pnlHead.add(lblDataType, gbc);
 		
 		DataTypes = new JComboBox<FileParserPnl>();
-		initDataTypes();
+		
 		DataTypes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				FileParserPnl pnl = ((FileParserPnl)DataTypes.getSelectedItem());
@@ -175,10 +177,20 @@ public class TypeSourceMap extends JInternalFrame {
 		pnlBody.add(scrollPaneData, gbc_scrollPaneData);
 		scrollPaneData.setViewportView(tblDataColumns);
 		files=new ArrayList<DataFile>();
+		initDataTypes();
 	}
 	private void initDataTypes()
 	{
 		//TODO create code to message db for data types
+		
+		try {
+			String types = FileMapperServiceDriver.getDataTypes();
+			GetDataTypes feilds = FileMapperServiceDriver.extractTypes(types);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 	private boolean doMatching(DataSource source)
 	{
