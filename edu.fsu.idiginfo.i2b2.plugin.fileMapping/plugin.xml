@@ -24,10 +24,16 @@
   
      
       <view
-      		name="Testing"
+      		name="ViewTesting"
             category="edu.fsu.idiginfo.i2b2.fileMapping"
             class="edu.fsu.idiginfo.i2b2.fileMapper.fileMapViews.ViewTesting"
             id="edu.fsu.idiginfo.i2b2.fileMapper.fileMapViews.ViewTesting">
+      </view>
+      <view
+      		name="AppTesting"
+            category="edu.fsu.idiginfo.i2b2.fileMapping"
+            class="edu.fsu.idiginfo.i2b2.fileMapper.fileMapViews.testApp"
+            id="edu.fsu.idiginfo.i2b2.fileMapper.fileMapViews.testApp">
       </view>
    </extension>
    <extension

@@ -7,6 +7,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.part.ViewPart;
+import org.eclipse.swt.widgets.Button;
 
 public class ViewTesting extends ViewPart {
 
@@ -24,7 +25,7 @@ public class ViewTesting extends ViewPart {
 	public void createPartControl(Composite parent) {
 		Composite container = toolkit.createComposite(parent, SWT.NONE);
 		toolkit.paintBordersFor(container);
-
+toolkit.
 		createActions();
 		initializeToolBar();
 		initializeMenu();
@@ -60,5 +61,4 @@ public class ViewTesting extends ViewPart {
 	public void setFocus() {
 		// Set the focus
 	}
-
 }

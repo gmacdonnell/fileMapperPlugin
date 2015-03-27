@@ -1,15 +1,9 @@
 package edu.fsu.idiginfo.i2b2.fileMapper.fileMapViews;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFileChooser;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
-import java.awt.GridLayout;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 import java.awt.GridBagLayout;
@@ -17,26 +11,17 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.io.File;
 import java.util.ArrayList;
-import java.util.List;
-
 import javax.swing.JTable;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.ColumnData;
 import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.DataFile;
 import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.DataSource;
 import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.GetDataTypes;
-import edu.fsu.idiginfo.i2b2.fileMapper.fileMapperUtil.IFileParser;
 import edu.fsu.idiginfo.i2b2.fileMapper.fileMapperUtil.models.ColumnTableModel;
-import edu.fsu.idiginfo.i2b2.fileMapper.fileMapperUtil.models.FileTableModel;
 import edu.fsu.idiginfo.i2b2.fileMapper.ws.FileMapperServiceDriver;
 import javax.swing.JScrollPane;
 
-public class TypeSourceMap extends JInternalFrame {
+public class TypeSourceMap extends JPanel {
 	/**
 	 * map file from a data source to datatypes from i2b2
 	 * 
@@ -57,12 +42,13 @@ public class TypeSourceMap extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public TypeSourceMap() {
-		setResizable(true);
-		setMaximizable(true);
-		setBounds(100, 100, 507, 480);
+		//setResizable(true);
+	//	setMaximizable(true);
+		setBounds(100, 100, 511, 672);
 		
 		JPanel pnlHead = new JPanel();
-		getContentPane().add(pnlHead, BorderLayout.NORTH);
+	//	getContentPane().add(pnlHead, BorderLayout.NORTH);
+		this.add(pnlHead, BorderLayout.NORTH);
 		GridBagLayout gbl_pnlHead = new GridBagLayout();
 		gbl_pnlHead.columnWidths = new int[]{84, 168, 96, 0, 0};
 		gbl_pnlHead.rowHeights = new int[]{25, 0};
@@ -142,10 +128,11 @@ public class TypeSourceMap extends JInternalFrame {
 		pnlHead.add(btnShowFiles, gbc_btnShowFiles);
 		
 		JPanel pnlBody = new JPanel();
-		getContentPane().add(pnlBody, BorderLayout.CENTER);
+	//	getContentPane().add(pnlBody, BorderLayout.CENTER);
+		this.add(pnlBody, BorderLayout.CENTER);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0};
-		gridBagLayout.rowHeights = new int[]{50, 50, 0};
+		gridBagLayout.rowHeights = new int[]{160, 50, 0};
 		gridBagLayout.columnWeights = new double[]{1.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{1.0, 1.0, Double.MIN_VALUE};
 		pnlBody.setLayout(gridBagLayout);
@@ -182,7 +169,7 @@ public class TypeSourceMap extends JInternalFrame {
 	private void initDataTypes()
 	{
 		//TODO create code to message db for data types
-		
+	/*	
 		try {
 			String types = FileMapperServiceDriver.getDataTypes();
 			GetDataTypes feilds = FileMapperServiceDriver.extractTypes(types);
@@ -190,7 +177,7 @@ public class TypeSourceMap extends JInternalFrame {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		*/
 	}
 	private boolean doMatching(DataSource source)
 	{
