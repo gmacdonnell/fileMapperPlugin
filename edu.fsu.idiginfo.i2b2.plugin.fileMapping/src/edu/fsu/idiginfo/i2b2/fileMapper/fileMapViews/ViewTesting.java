@@ -25,7 +25,7 @@ public class ViewTesting extends ViewPart {
 	public void createPartControl(Composite parent) {
 		Composite container = toolkit.createComposite(parent, SWT.NONE);
 		toolkit.paintBordersFor(container);
-toolkit.
+
 		createActions();
 		initializeToolBar();
 		initializeMenu();
