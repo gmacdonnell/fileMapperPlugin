@@ -8,10 +8,16 @@ import javax.swing.JDesktopPane;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ImportFileDlg extends JDialog {
 
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6010693989489708891L;
 	private JDesktopPane deskTop;
 
 	/**
@@ -31,15 +37,14 @@ public class ImportFileDlg extends JDialog {
 	 * Create the dialog.
 	 */
 	public ImportFileDlg() {
-		setBounds(100, 100, 450, 300);
+		setTitle("Import File Data to I2B2 Types");
+		setBounds(100, 100, 685, 617);
 		getContentPane().setLayout(new BorderLayout());
 		
 		
 		{
 			deskTop = new JDesktopPane();
-			TypeSourceMap typeSourceMap = new TypeSourceMap();
-			typeSourceMap.setVisible(true);
-			deskTop.add(typeSourceMap);
+			newTypeSourceMap();
 			getContentPane().add(deskTop, BorderLayout.CENTER);
 			
 		}
@@ -47,6 +52,15 @@ public class ImportFileDlg extends JDialog {
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
+			{
+				JButton btnAddFileMap = new JButton("Add File Map");
+				btnAddFileMap.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						newTypeSourceMap();
+					}
+				});
+				buttonPane.add(btnAddFileMap);
+			}
 			{
 				JButton okButton = new JButton("OK");
 				okButton.setActionCommand("OK");
@@ -61,4 +75,14 @@ public class ImportFileDlg extends JDialog {
 		}
 	}
 
+	private void newTypeSourceMap()
+	{
+		TypeSourceMap typeSourceMap = new TypeSourceMap();
+		//typeSourceMap.setSelected(true);
+		typeSourceMap.setTitle("File Data Map");
+		typeSourceMap.setClosable(true);
+		typeSourceMap.setLocation(25, 0);
+		typeSourceMap.setVisible(true);
+		deskTop.add(typeSourceMap);
+	}
 }

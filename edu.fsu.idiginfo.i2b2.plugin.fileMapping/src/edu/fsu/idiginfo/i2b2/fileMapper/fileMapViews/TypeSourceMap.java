@@ -21,7 +21,7 @@ import edu.fsu.idiginfo.i2b2.fileMapper.fileMapperUtil.models.ColumnTableModel;
 import edu.fsu.idiginfo.i2b2.fileMapper.ws.FileMapperServiceDriver;
 import javax.swing.JScrollPane;
 
-public class TypeSourceMap extends JPanel {
+public class TypeSourceMap extends JInternalFrame {
 	/**
 	 * map file from a data source to datatypes from i2b2
 	 * 
@@ -42,13 +42,12 @@ public class TypeSourceMap extends JPanel {
 	 * Create the frame.
 	 */
 	public TypeSourceMap() {
-		//setResizable(true);
-	//	setMaximizable(true);
-		setBounds(100, 100, 511, 672);
+		setResizable(true);
+		setMaximizable(true);
+		setBounds(100, 100, 507, 480);
 		
 		JPanel pnlHead = new JPanel();
-	//	getContentPane().add(pnlHead, BorderLayout.NORTH);
-		this.add(pnlHead, BorderLayout.NORTH);
+		getContentPane().add(pnlHead, BorderLayout.NORTH);
 		GridBagLayout gbl_pnlHead = new GridBagLayout();
 		gbl_pnlHead.columnWidths = new int[]{84, 168, 96, 0, 0};
 		gbl_pnlHead.rowHeights = new int[]{25, 0};
@@ -128,11 +127,10 @@ public class TypeSourceMap extends JPanel {
 		pnlHead.add(btnShowFiles, gbc_btnShowFiles);
 		
 		JPanel pnlBody = new JPanel();
-	//	getContentPane().add(pnlBody, BorderLayout.CENTER);
-		this.add(pnlBody, BorderLayout.CENTER);
+		getContentPane().add(pnlBody, BorderLayout.CENTER);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0};
-		gridBagLayout.rowHeights = new int[]{160, 50, 0};
+		gridBagLayout.rowHeights = new int[]{50, 50, 0};
 		gridBagLayout.columnWeights = new double[]{1.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{1.0, 1.0, Double.MIN_VALUE};
 		pnlBody.setLayout(gridBagLayout);
