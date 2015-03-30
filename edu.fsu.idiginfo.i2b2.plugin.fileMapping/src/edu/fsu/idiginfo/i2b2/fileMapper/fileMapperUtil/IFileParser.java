@@ -1,13 +1,10 @@
 package edu.fsu.idiginfo.i2b2.fileMapper.fileMapperUtil;
 
 import java.util.List;
-import javax.swing.JFrame;
-
 import org.eclipse.jface.viewers.IStructuredContentProvider;
 
 import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.Column;
 import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.ColumnData;
-import edu.fsu.idiginfo.i2b2.fileMapper.fileMapViews.DelimiterView;
 
 public interface IFileParser extends IStructuredContentProvider{
 	

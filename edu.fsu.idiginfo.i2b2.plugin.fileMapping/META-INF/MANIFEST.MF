@@ -21,7 +21,8 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6,
  JavaSE-1.7
 Bundle-Vendor: edu.fsu.idiginfo
 Bundle-ClassPath: .,
- genlib/i2b2Common-core.jar
+ genlib/i2b2Common-core.jar,
+ lib/spring-2.0.jar
 Import-Package: com.jgoodies.forms.factories,
  com.jgoodies.forms.layout
 Export-Package: edu.fsu.idiginfo.i2b2.fileMapper.fileMapViews;

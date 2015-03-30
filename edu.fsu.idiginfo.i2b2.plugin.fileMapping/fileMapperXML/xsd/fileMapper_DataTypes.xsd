@@ -189,4 +189,16 @@
     		<xs:element name="values" type="xs:string" maxOccurs="unbounded" minOccurs="0"></xs:element>
     	</xs:sequence>
     </xs:complexType>
+
+    <xs:complexType name="DataField">
+    	<xs:sequence>
+    		<xs:element name="Type" type="map:DataType" maxOccurs="1"
+    			minOccurs="0">
+    		</xs:element>
+    		<xs:element name="FileColumn" type="map:ColumnMatch"
+    			maxOccurs="1" minOccurs="0">
+    		</xs:element>
+    		<xs:element name="Field" type="map:DataTypeField" maxOccurs="1" minOccurs="0"></xs:element>
+    	</xs:sequence>
+    </xs:complexType>
 </xs:schema>
