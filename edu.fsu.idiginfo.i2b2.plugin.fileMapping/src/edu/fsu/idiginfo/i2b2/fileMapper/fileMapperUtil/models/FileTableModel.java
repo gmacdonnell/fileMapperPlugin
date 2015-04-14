@@ -8,6 +8,7 @@ import java.util.Map;
 import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.Column;
 import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.ColumnData;
 import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.ColumnMatch;
+import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.DataField;
 import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.DataSource;
 
 import javax.swing.table.AbstractTableModel;
@@ -140,7 +141,9 @@ public class FileTableModel extends AbstractTableModel {
 				column.getSourceFile().getNotes().set(TITLESINDEX,TITLES);
 			}
 			match.getColumns().add(cd);
-			outVal.getColumns().add(match);
+			DataField field = new DataField();
+			field.setFileColumn(match);
+			outVal.getColumns().add(field);
 		}
 		
 		return outVal;

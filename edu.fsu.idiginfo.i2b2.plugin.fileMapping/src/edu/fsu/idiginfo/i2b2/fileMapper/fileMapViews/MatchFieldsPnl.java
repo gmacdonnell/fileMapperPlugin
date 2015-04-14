@@ -13,6 +13,7 @@ import javax.swing.JComboBox;
 import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.Column;
 import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.ColumnData;
 import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.ColumnMatch;
+import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.DataField;
 import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.DataSource;
 import edu.fsu.idiginfo.i2b2.fileMapper.fileMapperUtil.ColumnUtil;
 
@@ -101,19 +102,19 @@ public class MatchFieldsPnl extends JPanel {
 	}
 	private void fillMatchCombo(JComboBox<ColumnMatchView> box, DataSource source)
 	{
-		List<ColumnMatch> columns = source.getColumns();
-		for(ColumnMatch colMatch : columns)
+		List<DataField> columns = source.getColumns();
+		for(DataField field : columns)
 		{
-			box.addItem(new ColumnMatchView(colMatch));
+			box.addItem(new ColumnMatchView(field));
 		}
 		box.repaint();
 	}
 	private void fillColumnCombo(JComboBox<ColumnView> box, DataSource source)
 	{
-		List<ColumnMatch> columns = source.getColumns();
-		for(ColumnMatch colMatch : columns)
+		List<DataField> columns = source.getColumns();
+		for(DataField field : columns)
 		{
-			ColumnData col = ColumnUtil.getLastData(colMatch);
+			ColumnData col = ColumnUtil.getLastData(field.getFileColumn());
 			box.addItem(new ColumnView(col));
 		}
 		box.repaint();
@@ -123,9 +124,9 @@ public class MatchFieldsPnl extends JPanel {
 		FileField.setSelectedIndex(index);
 	}
 	
-	public ColumnMatch getMatch()
+	public DataField getMatch()
 	{
-		ColumnMatch match = null;
+		DataField match = null;
 		if(cbInclude.isSelected())
 		{
 			if(cbMatch.isSelected())
@@ -134,11 +135,12 @@ public class MatchFieldsPnl extends JPanel {
 				
 			}else
 			{
-				match = new ColumnMatch();
+				match = new DataField();
 				
 			}
-			match.getColumns().add(((ColumnView)FileField.getSelectedItem()).getColumn());
+			match.getFileColumn().getColumns().add(((ColumnView)FileField.getSelectedItem()).getColumn());
 		}
+		
 		return match;
 	}
 	

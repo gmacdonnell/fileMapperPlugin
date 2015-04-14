@@ -7,6 +7,7 @@ import java.awt.GridLayout;
 import javax.swing.JScrollPane;
 
 import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.ColumnMatch;
+import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.DataField;
 import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.DataSource;
 import javax.swing.JMenuBar;
 import java.awt.GridBagLayout;
@@ -100,7 +101,7 @@ public class CombineColumnPnl extends JPanel {
 			{
 				if(((MatchFieldsPnl) comp).include())
 				{
-					ColumnMatch match = ((MatchFieldsPnl)comp).getMatch();
+					DataField match = ((MatchFieldsPnl)comp).getMatch();
 					if(!existing.getColumns().contains(match))
 					{
 						existing.getColumns().add(match);

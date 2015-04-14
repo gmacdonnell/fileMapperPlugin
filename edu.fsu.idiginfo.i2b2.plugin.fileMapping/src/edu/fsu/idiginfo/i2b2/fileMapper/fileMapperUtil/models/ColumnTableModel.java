@@ -8,7 +8,9 @@ import java.util.Map;
 import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.Column;
 import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.ColumnData;
 import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.ColumnMatch;
+import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.DataField;
 import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.DataSource;
+import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.DataTypeField;
 import edu.fsu.idiginfo.i2b2.fileMapper.fileMapperUtil.ColumnUtil;
 
 import javax.swing.table.AbstractTableModel;
@@ -21,7 +23,7 @@ public class ColumnTableModel extends AbstractTableModel {
 	private static final long serialVersionUID = -3064644578128279706L;
 
 	
-	private List<ColumnMatch> columns = new ArrayList<ColumnMatch>();
+	protected DataSource columns = new DataSource();
 
 
 	//public static int ROWS = 5;
@@ -34,22 +36,27 @@ public class ColumnTableModel extends AbstractTableModel {
 
 	@Override
 	public String getColumnName(int index) {
-		ColumnMatch match = columns.get(index);
+		DataTypeField field = columns.getColumns().get(index).getField();
+		if(field == null)
+		{
+		ColumnMatch match = columns.getColumns().get(index).getFileColumn();
 		Column column = ColumnUtil.getLastColumn(match);
 		return column.getName();
+		}
+		return field.getFieldCD();
 	}
 	
 
 
 	@Override
 	public int getColumnCount() {
-		return columns.size();
+		return columns.getColumns().size();
 	}
 
 	@Override
 	public int getRowCount() {
-		if (columns.size() > 0) {
-			return columns.get(0).getColumns().size();
+		if (columns.getColumns().size() > 0) {
+			return columns.getColumns().get(0).getFileColumn().getColumns().size();
 		}
 		return 0;
 	}
@@ -57,7 +64,7 @@ public class ColumnTableModel extends AbstractTableModel {
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		try {
-				return columns.get(columnIndex).getColumns().get(rowIndex).getValues().get(0);
+				return columns.getColumns().get(columnIndex).getFileColumn().getColumns().get(rowIndex).getValues().get(0);
 		} catch (Exception e) {
 			return null;
 		}
@@ -68,22 +75,32 @@ public class ColumnTableModel extends AbstractTableModel {
 	public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
 		if(aValue instanceof Column)
 		{
-			columns.get(columnIndex).getColumns().set(rowIndex, (ColumnData)aValue);
+			columns.getColumns().get(columnIndex).getFileColumn().getColumns().set(rowIndex, (ColumnData)aValue);
 		}
 		
 	}
 
 	public void removeAllColumns() {
-		columns.clear();
+		columns.getColumns().clear();
 	}
 
 	public void removeColumn(int selectedColumn) {
-		columns.remove(selectedColumn);
+		columns.getColumns().remove(selectedColumn);
 		fireTableStructureChanged();
 	}
 
 	public void addColumns(List<ColumnMatch> data) {
-		columns = data;
+		if (columns == null)
+		{
+			columns = new DataSource();
+		}
+		for(ColumnMatch match :data )
+				{
+					DataField field = new DataField();
+					field.setFileColumn(match);
+					columns.getColumns().add(field);
+				}
+		fireTableStructureChanged();
 		fireTableStructureChanged();
 	}
 
@@ -93,19 +110,13 @@ public class ColumnTableModel extends AbstractTableModel {
 
 	public void setDataSource(DataSource source)
 	{
-		columns = source.getColumns();
+		columns = source;
 		fireTableStructureChanged();
 	}
 	public DataSource getDataSource()
 	{
-		DataSource outVal = new DataSource();
-		for(ColumnMatch match : columns)
-		{
-			
-			outVal.getColumns().add(match);
-		}
 		
-		return outVal;
+		return columns;
 	}
 	
 

@@ -13,11 +13,13 @@ import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import javax.swing.JTable;
 
+import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.DataField;
 import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.DataFile;
 import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.DataSource;
 import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.DataType;
 import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.GetDataTypes;
 import edu.fsu.idiginfo.i2b2.fileMapper.fileMapperUtil.models.ColumnTableModel;
+import edu.fsu.idiginfo.i2b2.fileMapper.fileMapperUtil.models.TypeColumnModel;
 import edu.fsu.idiginfo.i2b2.fileMapper.ws.FileMapperServiceDriver;
 
 import javax.swing.JScrollPane;
@@ -32,13 +34,15 @@ public class TypeSourceMap extends JPanel {
 	private static final long serialVersionUID = -3755640751213165068L;
 	private JTable tblFields;
 	private JTable tblDataColumns;
-	private ColumnTableModel sourceModel;
+	protected ColumnTableModel sourceModel;
+	protected TypeColumnModel fieldModel; 
 	private JComboBox<DataTypeView> DataTypes;
 	private JButton btnAddFile;
 	private ArrayList<DataFile> files;
 	private JScrollPane scrollPaneFields;
 	private JScrollPane scrollPaneData;
 	private Component horizontalStrut;
+	private boolean isBuilt;
 	
 
 	/**
@@ -89,14 +93,15 @@ public class TypeSourceMap extends JPanel {
 		
 		DataTypes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				if(isBuilt)
+				{
 				//TODO what should be done here
 				DataTypeView typeView = (DataTypeView)DataTypes.getSelectedItem();
 				DataType type = typeView.getDataType();
 				showFields(type);
 				
 					btnAddFile.setEnabled(true);
-				
+				}
 			}
 		});
 		
@@ -179,20 +184,28 @@ public class TypeSourceMap extends JPanel {
 			pnlBody.add(scrollPaneData, gbc_scrollPaneData);
 			scrollPaneData.setViewportView(tblDataColumns);
 		files=new ArrayList<DataFile>();
+		isBuilt = false;
 		initDataTypes();
 	}
 	private void showFields(DataType type)
 	{
+		fieldModel = new TypeColumnModel();
+		tblFields.setModel(fieldModel);
 		try {
 			GetDataTypes gdt = new GetDataTypes();
 			gdt.getTypes().add(type);
 			String types = FileMapperServiceDriver.getKeys(gdt);
 			GetDataTypes feilds = FileMapperServiceDriver.extractTypes(types);
+			ArrayList<DataField>list = new ArrayList<DataField>();
 			for(DataType field : feilds.getTypes())
 			{
-				DataTypes.addItem( new DataTypeView(type));
+				DataField current = new DataField();
+				current.setType(field);
+				current.setType(type);
+				list.add(current);
 				
 			}
+			fieldModel.addColumns(list);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -212,6 +225,7 @@ public class TypeSourceMap extends JPanel {
 				DataTypes.addItem( new DataTypeView(type));
 				
 			}
+			isBuilt = true;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

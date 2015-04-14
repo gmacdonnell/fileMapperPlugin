@@ -13,7 +13,7 @@ public interface IFileParser extends IStructuredContentProvider{
 	public void loadFileShort(String filePath) throws Exception; // loads only SAMPLES number of records
 	public void setDelimiters(List<Object> del);
 	public int getFieldCount();
-	public List<ColumnData> parseFile();
+	public List<ColumnData> parseFile(); // must add edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.DataFile info to the columns 
 	public String[][] getItems();
 	public Column getColumn();
 	@Override

@@ -8,6 +8,7 @@ import javax.swing.JComboBox;
 import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.Column;
 import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.ColumnData;
 import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.ColumnMatch;
+import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.DataField;
 import edu.fsu.idiginfo.i2b2.fileMapper.fileMapperUtil.ColumnUtil;
 
 import java.awt.GridBagLayout;
@@ -20,13 +21,13 @@ public class ColumnMatchView extends JPanel {
 	 */
 	private static final long serialVersionUID = 5747552307035951539L;
 	private JTextField txtName;
-	protected ColumnMatch columnMatch;
+	protected DataField field;
 	private JTextField txtIndex;
 
 	/**
 	 * Create the panel.
 	 */
-	public ColumnMatchView(ColumnMatch col) {
+	public ColumnMatchView(DataField col) {
 		
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{133, 60, 0};
@@ -51,7 +52,7 @@ public class ColumnMatchView extends JPanel {
 		gbc_txtIndex.gridy = 0;
 		add(txtIndex, gbc_txtIndex);
 		txtIndex.setColumns(10);
-		setColumnMatch(col);
+		setField(col);
 
 	}
 
@@ -60,18 +61,18 @@ public class ColumnMatchView extends JPanel {
 	
 	public String getName()
 	{
-		return ColumnUtil.getLastColumn(columnMatch).getName();
+		return ColumnUtil.getLastColumn(field.getFileColumn()).getName();
 	}
 
 	
 
-	public ColumnMatch getColumnMatch() {
-		return columnMatch;
+	public DataField getColumnMatch() {
+		return field;
 	}
 
-	public void setColumnMatch(ColumnMatch columnMatch) {
-		this.columnMatch = columnMatch;
-		Column column = ColumnUtil.getLastColumn(columnMatch);
+	public void setField(DataField field) {
+		this.field = field;
+		Column column = ColumnUtil.getLastColumn(field.getFileColumn());
 		setName(column.getName());
 	}
 	
@@ -83,7 +84,7 @@ public class ColumnMatchView extends JPanel {
 	public boolean isMatch(String name)
 	{
 		boolean match = false;
-		for(ColumnData colData : columnMatch.getColumns())
+		for(ColumnData colData : field.getFileColumn().getColumns())
 		{
 			Column col = colData.getColumn();
 			if(col.getName().equals(name))
