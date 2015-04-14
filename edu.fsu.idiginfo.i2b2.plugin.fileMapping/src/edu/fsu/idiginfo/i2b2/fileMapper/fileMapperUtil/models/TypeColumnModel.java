@@ -91,7 +91,7 @@ public class TypeColumnModel extends AbstractTableModel {
 		case ITABLE: return type.getType().getTableCD();
 		case IKEY: return type.getField().isIsKey();
 		case IFIELD: return type.getField().getFieldCD();
-		case IFILES: return type.getFileColumn().getColumns().get(0).getColumn().getSourceFile().getID();
+		case IFILES: return type.getFileColumn().getColumns().get(0).getColumn().getSourceFile();
 			default: return "ERROR";
 		}
 		

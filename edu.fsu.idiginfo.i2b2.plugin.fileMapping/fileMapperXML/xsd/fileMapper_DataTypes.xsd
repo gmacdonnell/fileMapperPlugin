@@ -148,7 +148,7 @@
 
 	<xs:complexType name="Column">
 		<xs:sequence>
-			<xs:element name="SourceFile" type="xs:string"></xs:element>
+			<xs:element name="SourceFile" type="map:DataFile"></xs:element>
 			<xs:element name="Index" type="xs:int"></xs:element>
 			<xs:element name="Name" type="xs:string"></xs:element>
 		</xs:sequence>
@@ -195,6 +195,17 @@
     			maxOccurs="1" minOccurs="0">
     		</xs:element>
     		<xs:element name="Field" type="map:DataTypeField" maxOccurs="1" minOccurs="0"></xs:element>
+    	</xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="DataFile">
+    	<xs:sequence>
+    		<xs:element name="ID" type="xs:string"></xs:element>
+    		<xs:element name="path" type="xs:string"></xs:element>
+    		<xs:element name="notes" type="xs:int"
+    			maxOccurs="unbounded" minOccurs="0">
+    		</xs:element>
+    		<xs:element name="type" type="xs:string"></xs:element>
     	</xs:sequence>
     </xs:complexType>
 </xs:schema>
