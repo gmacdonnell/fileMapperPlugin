@@ -1,0 +1,27 @@
+CREATE OR REPLACE PROCEDURE GET_NEXT_PROVIDER_ID ( 
+ OUTVAL OUT NUMBER 
+) AS 
+BEGIN
+   select NextID into OUTVAL from Next_Provider_ID;
+  update Next_Patient_ID set NextID = OUTVAL +1;
+END GET_NEXT_PROVIDER_ID;
+
+CREATE OR REPLACE PROCEDURE GET_NEXT_ENCOUNTER_ID 
+(
+  OUTVAL OUT NUMBER 
+) AS 
+BEGIN
+   select NextID into OUTVAL from Next_Encounter_ID;
+  update Next_Patient_ID set NextID = OUTVAL +1;
+END GET_NEXT_ENCOUNTER_ID;
+
+
+CREATE OR REPLACE PROCEDURE GET_NEXT_PATIENT_ID 
+(
+  OUTVAL OUT NUMBER 
+) AS 
+BEGIN
+  select NextID into OUTVAL from Next_Patient_ID;
+  update Next_Patient_ID set NextID = OUTVAL +1;
+
+END GET_NEXT_PATIENT_ID;
