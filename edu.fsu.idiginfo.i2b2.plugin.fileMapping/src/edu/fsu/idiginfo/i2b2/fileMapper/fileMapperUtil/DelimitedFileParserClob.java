@@ -63,7 +63,6 @@ public class DelimitedFileParserClob implements IFileParser {
 
 		try {
 			File out = new File(OutFile);
-			File in = new File(InFile);
 			File errors = new File(InFile + ERROR_LOG_EXT);
 			File verrors = new File(OutFile + ERROR_LOG_EXT);
 			File cerrors = new File(VOutFile + ERROR_LOG_EXT);
@@ -99,7 +98,7 @@ public class DelimitedFileParserClob implements IFileParser {
 			int[] vcount = validateRows(OutFile, VOutFile);
 			System.out.println("Total rows  " + vcount[GOOD_COUNT]);
 			System.out.println("Total invalid rows: " + vcount[BAD_COUNT]);
-			int[] ccount = parseComplaint(vout.getPath(), cout.getPath());
+			int[] ccount = parseComplaint(VOutFile, COutFile);
 			System.out.println("Total rows into parseComplaint"
 					+ ccount[GOOD_COUNT]);
 			System.out.println("Total Error Records: " + ccount[BAD_COUNT]);
@@ -188,6 +187,7 @@ public class DelimitedFileParserClob implements IFileParser {
 		FileOutputStream errors = null;
 		boolean bad;
 		int[] out = new int[2];
+		Integer  visitID = new Integer(0);
 		String line;
 		try {
 			is = new FileInputStream(in_file);
@@ -200,6 +200,7 @@ public class DelimitedFileParserClob implements IFileParser {
 				bad = false;
 				String[] value = line.split(COMMA);
 				if (value.length == 10) {
+					visitID++;
 					TMHVisit current = new TMHVisit();
 					current.setHSPMDNUM(value[HSP_MD_NUM]);
 					current.setEncounterdiagdescr(value[ENCOUNTERDIAGDESCR]);
@@ -211,10 +212,11 @@ public class DelimitedFileParserClob implements IFileParser {
 					current.setTbccYrsFs(value[TBCC_YRS_FS]);
 					current.setTbccYrsFsDt(value[TBCC_YRS_FS_DT]);
 					current.setSurgHistProc(value[SURG_HIST_PROC]);
+					current.setVisitId(visitID.toString());
 					String[] complaints = value[CHF_CMPLN].split(AND);
 					for (String complaint : complaints) {
 						current.getChfCmpln().add(complaint);
-						String text = current.getHSPMDNUM() + "," + complaint;
+						String text = current.getHSPMDNUM() + COMMA + complaint + COMMA + visitID.toString();
 						oStream.write(text.getBytes());
 						oStream.write(NEW_LINE.getBytes());
 						oStream.flush();
