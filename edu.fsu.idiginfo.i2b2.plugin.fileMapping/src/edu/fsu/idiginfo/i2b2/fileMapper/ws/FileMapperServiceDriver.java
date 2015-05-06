@@ -130,6 +130,40 @@ public class FileMapperServiceDriver {
 				
 	}
 	
+	public static DataType extractTypeFields(String resltMessage) throws I2B2Exception
+	{
+		
+	try{
+		JAXBElement jaxbElement = FileMapperJAXBUtil.getJAXBUtil()
+				.unMashallFromString(resltMessage);
+		ResponseMessageType respMessageType = (ResponseMessageType) jaxbElement
+				.getValue();
+
+		BodyType bodyType = respMessageType.getMessageBody();
+		
+		
+			Unmarshaller unmarshaller = FileMapperJAXBUtil
+					.getUnmarshaller(DataType.class);
+			for(int index = 0; index < bodyType.getAny().size(); index ++)
+			{
+				Object temp = bodyType.getAny().get(index);
+				if(temp.getClass() == JAXBElement.class)
+				{
+					DataType type = (DataType)((JAXBElement)temp).getValue();
+					return type;
+				}
+				
+			}
+			return null;
+		
+		}catch(Exception e)
+		{
+			log.error(e.toString());
+			throw new I2B2Exception(e.getMessage());
+		}
+				
+	}
+	
 		
 	
 	public static String getDataTypes() throws Exception {

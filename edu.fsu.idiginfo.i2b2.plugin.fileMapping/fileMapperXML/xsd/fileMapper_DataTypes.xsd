@@ -208,4 +208,22 @@
     		<xs:element name="type" type="xs:string"></xs:element>
     	</xs:sequence>
     </xs:complexType>
+    <xs:complexType name="TMH_Visit">
+	    <xs:sequence>
+			<xs:element name="HSP_MD_NUM" type="xs:string"/>
+			<xs:element name="chf_cmpln" type="xs:string" maxOccurs="unbounded" minOccurs="0"/>
+			<xs:element name="encounterdiagdescr" type="xs:string"/>
+			<xs:element name="lchl_ntk" type="xs:string"/>
+			<xs:element name="smk_hw_mch" type="xs:string"/>
+			<xs:element name="smkng_frmr_smkrs_qt_tm" type="xs:string"/>
+			<xs:element name="smkng_stts" type="xs:string"/>
+			<xs:element name="tbcc_yrs_fs" type="xs:string"/>
+			<xs:element name="tbcc_yrs_fs_dt" type="xs:string"/>
+			<xs:element name="surg_hist_proc" type="xs:string"/>
+			<xs:element name="visit_id" type="xs:string"/>
+			<xs:element name="visit_status" type="xs:string"/>
+	 	</xs:sequence>
+	</xs:complexType>
+
+    <xs:element name="get_TMH_Visit" type="map:TMH_Visit"></xs:element>
 </xs:schema>

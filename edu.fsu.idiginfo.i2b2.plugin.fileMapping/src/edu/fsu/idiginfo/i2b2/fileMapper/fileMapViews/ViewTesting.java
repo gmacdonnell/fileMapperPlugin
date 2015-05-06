@@ -21,6 +21,7 @@ import org.eclipse.swt.events.MouseEvent;
 
 
 import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.DataSource;
+import org.eclipse.wb.swt.SWTResourceManager;
 
 public class ViewTesting extends ViewPart {
 
@@ -57,6 +58,8 @@ public class ViewTesting extends ViewPart {
 		toolkit.paintBordersFor(comControls);
 		
 		Button btnAddData = new Button(comControls, SWT.NONE);
+		btnAddData.setFont(SWTResourceManager.getFont("Tahoma", 8, SWT.NORMAL));
+		btnAddData.setForeground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_BORDER));
 		btnAddData.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseDown(MouseEvent e) {

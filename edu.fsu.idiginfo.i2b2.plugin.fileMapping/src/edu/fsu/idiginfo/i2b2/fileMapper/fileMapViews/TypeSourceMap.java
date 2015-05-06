@@ -17,6 +17,7 @@ import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.DataField;
 import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.DataFile;
 import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.DataSource;
 import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.DataType;
+import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.DataTypeField;
 import edu.fsu.idiginfo.i2b2.fileMapper.data.datavo.vdo.GetDataTypes;
 import edu.fsu.idiginfo.i2b2.fileMapper.fileMapperUtil.models.ColumnTableModel;
 import edu.fsu.idiginfo.i2b2.fileMapper.fileMapperUtil.models.TypeColumnModel;
@@ -90,7 +91,9 @@ public class TypeSourceMap extends JPanel {
 		pnlHead.add(lblDataType, gbc);
 		
 		DataTypes = new JComboBox<DataTypeView>();
-		
+		isBuilt = false;
+		initDataTypes();
+		DataTypes.setSelectedIndex(-1);
 		DataTypes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(isBuilt)
@@ -184,8 +187,8 @@ public class TypeSourceMap extends JPanel {
 			pnlBody.add(scrollPaneData, gbc_scrollPaneData);
 			scrollPaneData.setViewportView(tblDataColumns);
 		files=new ArrayList<DataFile>();
-		isBuilt = false;
-		initDataTypes();
+		
+		
 	}
 	private void showFields(DataType type)
 	{
@@ -195,15 +198,14 @@ public class TypeSourceMap extends JPanel {
 			GetDataTypes gdt = new GetDataTypes();
 			gdt.getTypes().add(type);
 			String types = FileMapperServiceDriver.getKeys(gdt);
-			GetDataTypes feilds = FileMapperServiceDriver.extractTypes(types);
+			DataType fields = FileMapperServiceDriver.extractTypeFields(types);
 			ArrayList<DataField>list = new ArrayList<DataField>();
-			for(DataType field : feilds.getTypes())
+			for(DataTypeField field : fields.getFieldSet())
 			{
 				DataField current = new DataField();
-				current.setType(field);
-				current.setType(type);
-				list.add(current);
-				
+				current.setType(fields);
+				current.setField(field);
+				list.add(current);				
 			}
 			fieldModel.addColumns(list);
 		} catch (Exception e) {

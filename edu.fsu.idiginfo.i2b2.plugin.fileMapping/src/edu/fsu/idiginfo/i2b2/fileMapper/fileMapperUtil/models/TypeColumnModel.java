@@ -27,13 +27,13 @@ public class TypeColumnModel extends AbstractTableModel {
 	public static String NAME = "Field Name";
 	public static String TABLE = "Table Name";
 	public static String KEY= "Is Key";
-	public static String FIELD = "Field Name";
-	public static String FILES = "FILES";
+	public static String DESCR = "Field Descr";
+	public static String TYPE = "Data Type";
 	public static final int INAME = 0;
 	public static final int ITABLE = 1;
 	public static final int IKEY =2;
-	public static final int IFIELD=3;
-	public static final int IFILES=4;
+	public static final int IDESCR=3;
+	public static final int ITYPE=4;
 	public static final int COLUMNCOUNT = 5;
 	private List<DataField> types = new ArrayList<DataField>();
 	
@@ -51,8 +51,8 @@ public class TypeColumnModel extends AbstractTableModel {
 		case INAME: return NAME;
 		case ITABLE: return TABLE;
 		case IKEY: return KEY;
-		case IFIELD: return FIELD;
-		case IFILES: return FILES;
+		case IDESCR: return DESCR;
+		case ITYPE: return TYPE;
 			default: return "ERROR";
 		}
 		
@@ -77,9 +77,9 @@ public class TypeColumnModel extends AbstractTableModel {
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		try {
 			
-			return getObject(types.get(columnIndex),rowIndex);
+			return getObject(types.get(rowIndex),columnIndex);
 		} catch (Exception e) {
-			return null;
+			return "error" ;
 		}
  
 	}
@@ -87,11 +87,11 @@ public class TypeColumnModel extends AbstractTableModel {
 	private Object getObject(DataField type, int column)
 	{
 		switch(column){
-		case INAME: return type.getType().getName();
-		case ITABLE: return type.getType().getTableCD();
+		case INAME: return type.getField().getFieldCD();
+		case ITABLE: return type.getField().getTableCD();
 		case IKEY: return type.getField().isIsKey();
-		case IFIELD: return type.getField().getFieldCD();
-		case IFILES: return type.getFileColumn().getColumns().get(0).getColumn().getSourceFile();
+		case IDESCR: return type.getField().getDESCR();
+		case ITYPE: return type.getField().getDataType();
 			default: return "ERROR";
 		}
 		
