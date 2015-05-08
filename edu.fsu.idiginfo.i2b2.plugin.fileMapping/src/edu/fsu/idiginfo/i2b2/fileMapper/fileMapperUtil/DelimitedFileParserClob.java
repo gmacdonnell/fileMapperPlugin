@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -24,18 +25,23 @@ import edu.fsu.idiginfo.i2b2.fileMapper.fileMapViews.TextDelimiterEditorDlg;
 
 public class DelimitedFileParserClob implements IFileParser {
 
+	private static String HEADER;
 	public static String TYPE = "DelimitedFile";
 	protected ArrayList<String> Lines;
 	protected String[] Delimiters;
 	protected int FieldCount;
 	protected int RowCount;
 	private static String ERROR_LOG_EXT = "_error.log";
+	private static String XML_EXT=".xml";
 	public static String COMMA = ",";
 	public static char QUOTE = '\"';
 	public static String AND = ";";
 	public static String NOT_NUM = "[\\D]+";
 	public static String BLANK = "";
+	public static String SPACE = " ";
+	public static String UNDERSCORE="_";
 	public static String NEW_RECORD = "\\r\\d*[^A-z]";
+	public static String ILLLEGAL_CHARS="[^A-z_,\\d\\s:.?;]";
 	public static String NEW_LINE = System.getProperty("line.separator");
 	public static int CHUNCK = 100;
 	public static int HSP_MD_NUM = 0;
@@ -51,8 +57,12 @@ public class DelimitedFileParserClob implements IFileParser {
 	public static int VISIT_ID = 10;
 	public static int VISIT_STATUS = 11;
 	public static int FIELD_BREAKS = 9;
+	public static int NUM_FIELDS=10;
 	public static int GOOD_COUNT = 0;
 	public static int BAD_COUNT = 1;
+	private static  String[] NTK_TYPE= { "HEAVY", "MODERATE", "OCCASIONAL", "NONE" };
+	private static boolean DEBUG = false;
+	private static Integer[] max_lengths = new Integer[NUM_FIELDS];
 
 	public static void main(String[] args) {
 		// for testing
@@ -60,14 +70,17 @@ public class DelimitedFileParserClob implements IFileParser {
 		String OutFile = "C:\\Users\\GMACDONNELL\\Desktop\\TMH_TESTING\\FSU_DX_CLEANED.csv";
 		String VOutFile = "C:\\Users\\GMACDONNELL\\Desktop\\TMH_TESTING\\FSU_Valid.csv";
 		String COutFile = "C:\\Users\\GMACDONNELL\\Desktop\\TMH_TESTING\\FSU_Comp.csv";
+		String DOutFile = "C:\\Users\\GMACDONNELL\\Desktop\\TMH_TESTING\\FSU_Dup.csv";
 
 		try {
 			File out = new File(OutFile);
 			File errors = new File(InFile + ERROR_LOG_EXT);
 			File verrors = new File(OutFile + ERROR_LOG_EXT);
 			File cerrors = new File(VOutFile + ERROR_LOG_EXT);
+			File derrors = new File(COutFile + ERROR_LOG_EXT);
 			File vout = new File(VOutFile);
 			File cout = new File(COutFile);
+			File dout = new File(DOutFile);
 			if (out.exists()) {
 				out.delete();
 				out = null;
@@ -84,6 +97,10 @@ public class DelimitedFileParserClob implements IFileParser {
 				cerrors.delete();
 				cerrors = null;
 			}
+			if (derrors.exists()) {
+				derrors.delete();
+				derrors = null;
+			}
 			if (vout.exists()) {
 				vout.delete();
 				vout = null;
@@ -92,6 +109,10 @@ public class DelimitedFileParserClob implements IFileParser {
 				cout.delete();
 				cout = null;
 			}
+			if (dout.exists()) {
+				dout.delete();
+				dout = null;
+			}
 			int[] count = cleanRows(InFile, OutFile);
 			System.out.println("Total rows cleaned: " + count[GOOD_COUNT]);
 			System.out.println("Total Error Records: " + count[BAD_COUNT]);
@@ -99,9 +120,13 @@ public class DelimitedFileParserClob implements IFileParser {
 			System.out.println("Total rows  " + vcount[GOOD_COUNT]);
 			System.out.println("Total invalid rows: " + vcount[BAD_COUNT]);
 			int[] ccount = parseComplaint(VOutFile, COutFile);
-			System.out.println("Total rows into parseComplaint"
+			System.out.println("Total rows into parseComplaint: "
 					+ ccount[GOOD_COUNT]);
 			System.out.println("Total Error Records: " + ccount[BAD_COUNT]);
+			int[] dcount = removeDuplicateRecords(COutFile, DOutFile);
+			System.out.println("Total rows into Cleaned File: "
+					+ dcount[GOOD_COUNT]);
+			System.out.println("Total Duplicates: " + dcount[BAD_COUNT]);
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}
@@ -175,7 +200,52 @@ public class DelimitedFileParserClob implements IFileParser {
 	public boolean hasID(String line) {
 		return false;
 	}
+	private static void makeXML(TMHVisit visit)
+	{
+		//TODO write code to add visit to a container class
+		
+	}
+	private static void cleanHeader(String header)
+	{
+		header = header.replaceAll(SPACE, UNDERSCORE);
+		HEADER = header.replaceAll("[^A-z_,]", UNDERSCORE);
+		HEADER = HEADER + ",VISIT_ID";
+		
+	}
+	public static int getMax(int A, int B)
+	{
+		if(A>=B)return A;
+		else return B;
+	}
+	private static void writeMax(FileOutputStream oStream) throws IOException
+	{
+		String output="";
+		int index = 0;
+		for(; index < NUM_FIELDS-1; index++)
+		{
+			
+			output= output + max_lengths[index].toString() + COMMA;
+		}
+		output= output + max_lengths[index].toString(); // so no trailing comma
+		oStream.write(output.getBytes());
+		oStream.write(NEW_LINE.getBytes());
+		oStream.flush();
+	}
+	static void  checkMaxValues(String[] value)
+	{
+		for(int index = 0; index < NUM_FIELDS; index++)
+		{
+			if(max_lengths[index] == null)
+			{
+				max_lengths[index] = new Integer(0);
+			}
+			if(index != CHF_CMPLN){
+			max_lengths[index] = getMax(max_lengths[index], value[index].length());
+			}
+		}
 
+
+	}
 	public static int[] parseComplaint(String infile, String outfile)
 			throws Exception {
 		File in_file = new File(infile);
@@ -194,14 +264,15 @@ public class DelimitedFileParserClob implements IFileParser {
 			oStream = new FileOutputStream(out_file);
 			errors = new FileOutputStream(error_log);
 			sc = new Scanner(is).useDelimiter(NEW_RECORD);
+			//oStream.write(HEADER.getBytes());
 			// sc.useDelimiter("\\n\\d*[^A-z][,]");
 			while (sc.hasNext()) {
 				line = sc.next();
 				bad = false;
 				String[] value = line.split(COMMA);
-				if (value.length == 10) {
+				if (value.length == NUM_FIELDS) {
 					visitID++;
-					TMHVisit current = new TMHVisit();
+					TMHVisit current = new TMHVisit(); // will be used later to generate xml
 					current.setHSPMDNUM(value[HSP_MD_NUM]);
 					current.setEncounterdiagdescr(value[ENCOUNTERDIAGDESCR]);
 
@@ -214,13 +285,28 @@ public class DelimitedFileParserClob implements IFileParser {
 					current.setSurgHistProc(value[SURG_HIST_PROC]);
 					current.setVisitId(visitID.toString());
 					String[] complaints = value[CHF_CMPLN].split(AND);
+					String head = value[HSP_MD_NUM]+COMMA;
+							
+					String tail =COMMA+
+									value[ENCOUNTERDIAGDESCR]+COMMA+
+									value[LCHL_NTK]+COMMA+
+									value[SMK_HW_MCH]+COMMA+
+									value[SMKNG_FRMR_SMKRS_QT_TM]+COMMA+
+									value[SMKNG_STTS]+COMMA+
+									value[TBCC_YRS_FS]+COMMA+
+									value[TBCC_YRS_FS_DT]+COMMA+
+									value[SURG_HIST_PROC]+COMMA+
+									visitID.toString();
+					checkMaxValues(value);
 					for (String complaint : complaints) {
 						current.getChfCmpln().add(complaint);
-						String text = current.getHSPMDNUM() + COMMA + complaint + COMMA + visitID.toString();
+						max_lengths[CHF_CMPLN]= getMax(complaint.length(), max_lengths[CHF_CMPLN]);
+						String text = head + complaint + tail;
 						oStream.write(text.getBytes());
 						oStream.write(NEW_LINE.getBytes());
 						oStream.flush();
 					}
+					makeXML(current);
 
 				} else {
 					bad = true;
@@ -236,6 +322,85 @@ public class DelimitedFileParserClob implements IFileParser {
 
 				out[GOOD_COUNT]++;
 			}
+		} catch (Exception e) {
+
+			throw (e);
+		} finally {
+			try {
+				if (is != null) {
+					is.close();
+				}
+				if (sc != null) {
+					sc.close();
+				}
+				if (oStream != null) {
+					oStream.close();
+				}
+				if (errors != null) {
+					errors.close();
+				}
+
+			} catch (Exception e) {
+
+				throw (e);
+			}
+		}
+		return out;
+	}
+	public static int[] removeDuplicateRecords(String infile, String outfile)
+			throws Exception {
+		int[] out = new int[2];
+		File in_file = new File(infile);
+		File out_file = new File(outfile);
+		File error_log = new File(infile + ERROR_LOG_EXT);
+		FileInputStream is = null;
+		Scanner sc = null;
+		FileOutputStream oStream = null;
+		FileOutputStream errors = null;
+		boolean bad;
+		String line;
+		try {
+			is = new FileInputStream(in_file);
+			oStream = new FileOutputStream(out_file);
+			errors = new FileOutputStream(error_log);
+			sc = new Scanner(is).useDelimiter(NEW_RECORD);
+			writeMax(oStream);
+			oStream.write(HEADER.getBytes());
+			oStream.write(NEW_LINE.getBytes());
+			
+			oStream.flush();
+			ArrayList<String> records = new ArrayList<String>();
+			while (sc.hasNextLine()) {
+				line = sc.nextLine();
+				String crushed = line.replaceAll(SPACE,BLANK);
+				bad = false;
+				
+				if(records.contains(crushed))
+				{
+					bad = true;
+				}
+				else
+				{
+					records.add(crushed);
+				}
+				
+				if (bad) {
+					errors.write(line.getBytes());
+					errors.write(NEW_LINE.getBytes());
+					errors.flush();
+					out[BAD_COUNT]++;
+				} else {
+					if(DEBUG){
+					line = line + out[GOOD_COUNT];
+					}
+					oStream.write(line.getBytes());
+					oStream.write(NEW_LINE.getBytes());
+					oStream.flush();
+
+				}
+				out[GOOD_COUNT]++;
+			}
+			
 		} catch (Exception e) {
 
 			throw (e);
@@ -300,7 +465,9 @@ public class DelimitedFileParserClob implements IFileParser {
 					errors.flush();
 					out[BAD_COUNT]++;
 				} else {
+					if(DEBUG){
 					line = line + out[GOOD_COUNT];
+					}
 					oStream.write(line.getBytes());
 					oStream.write(NEW_LINE.getBytes());
 					oStream.flush();
@@ -353,11 +520,16 @@ public class DelimitedFileParserClob implements IFileParser {
 			errors = new FileOutputStream(error_log);
 			sc = new Scanner(is).useDelimiter(NEW_RECORD);
 			// sc.useDelimiter("\\n\\d*[^A-z][,]");
+			cleanHeader(sc.next());
 			while (sc.hasNext()) {
 				line = sc.next();
+				line = line.replaceAll(ILLLEGAL_CHARS,SPACE);
 				bad = false;
 				int commas = countInstances(line, COMMA);
 				if (commas != FIELD_BREAKS) {
+					clean_using_ntk(line);
+					commas = countInstances(line, COMMA);
+					if (commas != FIELD_BREAKS) {
 					bad = true;
 					char cr = 10;
 					char lf = 13;
@@ -383,6 +555,7 @@ public class DelimitedFileParserClob implements IFileParser {
 					oStream.write(line.getBytes());
 					oStream.write(NEW_LINE.getBytes());
 					oStream.flush();
+				}
 				}
 				out[GOOD_COUNT]++;
 
@@ -455,6 +628,31 @@ public class DelimitedFileParserClob implements IFileParser {
 
 	}
 
+	public static void clean_using_ntk(String line)
+	{
+		int start = line.indexOf(COMMA);
+		int end =-1;
+		for(int index =0; index < NTK_TYPE.length; index ++)
+		{
+			int temp = line.indexOf(':', start+1);
+			if(temp > end ) end = temp;
+		}
+		if(end > start)
+		{
+			String front = line.substring(0,start);
+			String middle = line.substring(start,end);
+			String tail = line.substring(end);
+			if(countInstances(middle,COMMA)>1)
+			{
+				//removes all commas merging chf cmpl and encouterDiaDesc
+				middle = middle.replaceAll(COMMA, AND) + COMMA;
+			}
+			line = front + middle + tail;
+		}
+		
+		
+		
+	}
 	public void setDelimiters(List<Object> del) {
 		Object[] input = del.toArray();
 		Delimiters = new String[input.length];

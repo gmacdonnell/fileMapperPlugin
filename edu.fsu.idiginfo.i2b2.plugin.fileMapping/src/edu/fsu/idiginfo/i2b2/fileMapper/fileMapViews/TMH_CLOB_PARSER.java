@@ -89,9 +89,7 @@ public class TMH_CLOB_PARSER {
 	{
 		DelimitedFileParserClob parser = new DelimitedFileParserClob();
 		try{
-		int count = parser.CountRows(PATH);
-		//	int count = 10000;
-		txtCount.setText("Rows:"+count);
+		
 		
 		}catch(Exception e)
 		{
