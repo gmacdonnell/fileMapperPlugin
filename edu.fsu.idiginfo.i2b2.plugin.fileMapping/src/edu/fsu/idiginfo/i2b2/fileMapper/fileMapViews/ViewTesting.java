@@ -58,6 +58,7 @@ public class ViewTesting extends ViewPart {
 		toolkit.paintBordersFor(comControls);
 		
 		Button btnAddData = new Button(comControls, SWT.NONE);
+		btnAddData.setEnabled(true);
 		btnAddData.setFont(SWTResourceManager.getFont("Tahoma", 8, SWT.NORMAL));
 		btnAddData.setForeground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_BORDER));
 		btnAddData.addMouseListener(new MouseAdapter() {

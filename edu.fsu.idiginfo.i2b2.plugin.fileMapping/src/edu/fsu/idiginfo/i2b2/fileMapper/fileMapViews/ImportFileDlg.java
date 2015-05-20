@@ -31,7 +31,7 @@ public class ImportFileDlg extends JDialog {
 
 	/**
 	 * Launch the application.
-	
+	*/
 	public static void main(String[] args) {
 		try {
 			ImportFileDlg dialog = new ImportFileDlg();
@@ -41,7 +41,7 @@ public class ImportFileDlg extends JDialog {
 			e.printStackTrace();
 		}
 	}
- */
+ /**/
 	/**
 	 * Create the dialog.
 	 */
@@ -96,7 +96,7 @@ private void init()
 	
 	public DataSource showDialog()
 	{
-		setModal(true);
+	//	setModal(true);
 		setVisible(true);
 		if(result == AbsEditorDlg.OK)
 		{

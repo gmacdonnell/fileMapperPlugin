@@ -154,17 +154,17 @@ public class FileTableDlg extends JDialog {
 					btnLoadFile.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
 							JFileChooser dlg = new JFileChooser();
-							//if(dlg.showOpenDialog(getParent()) == JOptionPane.OK_OPTION)
-						//	{
+							if(dlg.showOpenDialog(getParent()) == JOptionPane.OK_OPTION)
+							{
 							
-							//File file = dlg.getSelectedFile();
-								File file = new File("C:\\Projects\\PCOR\\ExportToI2b2\\testFile.csv");
+							File file = dlg.getSelectedFile();
+								
 							setFilePath(file.getAbsolutePath());
 							IFileParser parser = ((FileParserPnl)DataTypes.getSelectedItem()).getParser();
 							setParser(parser);
 							load();
 							
-						//	}
+							}
 						}
 					});
 					buttonPane.add(btnLoadFile);

@@ -232,9 +232,9 @@ public class TypeSourceMap extends JPanel {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			JOptionPane.showInternalMessageDialog(null, "Error loading data Types see log for details");
-			
-		}
 		
+		}
+			
 	}
 	private boolean doMatching(DataSource source)
 	{
