@@ -168,7 +168,7 @@ public class FileMapperServiceDriver {
 	
 	public static String getDataTypes() throws Exception {
 		String response = null;
-
+/* for testing only
 		GetDataTypesRequestMessage reqMsg = new GetDataTypesRequestMessage();
 		try {
 			String requestString = reqMsg.doBuildXML();
@@ -185,7 +185,80 @@ public class FileMapperServiceDriver {
 			log.error(e.getMessage());
 			throw new Exception(e);
 		}
-
+*/
+		response = "<ns3:response xmlns:ns2="http://www.fsu.edu/data/datavo/vdo/" xmlns:ns3="http://www.i2b2.org/xsd/hive/msg/1.1/">
+    <message_header>
+        <i2b2_version_compatible>1.70</i2b2_version_compatible>
+        <sending_application>
+            <application_name>FileMapper Cell</application_name>
+            <application_version>1.6</application_version>
+        </sending_application>
+        <sending_facility>
+            <facility_name>i2b2 Hive</facility_name>
+        </sending_facility>
+        <receiving_application>
+            <application_name>i2b2 FileMapper</application_name>
+            <application_version>1.6</application_version>
+        </receiving_application>
+        <receiving_facility>
+            <facility_name>i2b2 Hive</facility_name>
+        </receiving_facility>
+        <datetime_of_message>2015-05-21T14:12:50.492-04:00</datetime_of_message>
+        <security>
+            <domain>i2b2demo</domain>
+            <username>gmacdonnell</username>
+            <password token_ms_timeout="1800000" is_token="true">SessionKey:11krVey6ZtuInaBgunTd</password>
+        </security>
+        <message_control_id>
+            <message_num>srZ9tt7tiMO4q2ZHySv9</message_num>
+            <instance_num>1</instance_num>
+        </message_control_id>
+        <processing_id>
+            <processing_id>P</processing_id>
+            <processing_mode>I</processing_mode>
+        </processing_id>
+        <accept_acknowledgement_type>AL</accept_acknowledgement_type>
+        <application_acknowledgement_type>AL</application_acknowledgement_type>
+        <country_code>US</country_code>
+        <project_id>Demo</project_id>
+    </message_header>
+    <response_header>
+        <info>Log information</info>
+        <result_status>
+            <status type="DONE" />
+            <polling_url interval_ms="100" />
+        </result_status>
+    </response_header>
+    <message_body>
+        <ns2:get_GetDataTypes>
+            <Types>
+                <name>Patient_FACT</name>
+                <table_CD>OBSERVATION_FACT</table_CD>
+                <isDimension>false</isDimension>
+            </Types>
+            <Types>
+                <name>PROVIDER</name>
+                <table_CD>PROVIDER_DIMENSION</table_CD>
+                <isDimension>false</isDimension>
+            </Types>
+            <Types>
+                <name>VISIT</name>
+                <table_CD>VISIT_DIMENSION</table_CD>
+                <isDimension>false</isDimension>
+            </Types>
+            <Types>
+                <name>PATIENT</name>
+                <table_CD>PATIENT_DIMENSION</table_CD>
+                <isDimension>false</isDimension>
+            </Types>
+            <Types>
+                <name>PATIENT_MAP</name>
+                <table_CD>PATIENT_MAP</table_CD>
+                <isDimension>false</isDimension>
+            </Types>
+        </ns2:get_GetDataTypes>
+    </message_body>
+</ns3:response>";
 		return response;
 	}
 
