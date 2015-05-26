@@ -237,7 +237,7 @@ public class FileMapperServiceDriver {
                 <isDimension>false</isDimension>
             </Types>
             <Types>
-                <name>PROVIDER</name>
+                <name>PROVIDER<//name>
                 <table_CD>PROVIDER_DIMENSION</table_CD>
                 <isDimension>false</isDimension>
             </Types>
